@@ -1,0 +1,633 @@
+
+
+
+<!--    <link rel="stylesheet" href="assets/vendor/css/core.css" />-->
+<!--    <link rel="stylesheet" href="assets/css/demo.css" />-->
+
+    <!-- Vendors CSS -->
+
+<!--    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />-->
+
+<!--    &lt;!&ndash; endbuild &ndash;&gt;-->
+
+<!--    <link rel="stylesheet" href="assets/vendor/datatables-bs5/datatables.bootstrap5.css" />-->
+<!--    <link rel="stylesheet" href="assets/vendor/datatables-responsive-bs5/responsive.bootstrap5.css" />-->
+<!--    <link rel="stylesheet" href="assets/vendor/datatables-buttons-bs5/buttons.bootstrap5.css" />-->
+<!--    <link rel="stylesheet" href="assets/vendor/select2/select2.css" />-->
+    <!-- Page CSS -->
+
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
+    <div class="layout-container">
+
+        <div class="row">
+            {{dashboard_menu}}
+        </div>
+
+        <!-- Layout container -->
+        <div class="layout-page mt-12">
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+
+
+                <!-- Content -->
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Product List Widget -->
+                        <div class="card mb-6">
+                            <div class="card-widget-separator-wrapper">
+                                <div class="card-body card-widget-separator">
+                                    <div class="row gy-4 gy-sm-1">
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div
+                                                    class="d-flex justify-content-between align-items-start card-widget-1 border-end pb-4 pb-sm-0">
+                                                <div>
+                                                    <p class="mb-1">Aktivne rezervacije</p>
+                                                    <h4 class="mb-1">KM 120</h4>
+                                                    <p class="mb-0">
+                                                        <span class="me-2">10 rezervacija</span><span class="badge bg-label-success">+5.7%</span>
+                                                    </p>
+                                                </div>
+                                                <span class="avatar me-sm-6">
+                            <span class="avatar-initial rounded"
+                            ><i class="icon-base ti tabler-smart-home icon-28px text-heading"></i
+                            ></span>
+                          </span>
+                                            </div>
+                                            <hr class="d-none d-sm-block d-lg-none me-6" />
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div
+                                                    class="d-flex justify-content-between align-items-start card-widget-2 border-end pb-4 pb-sm-0">
+                                                <div>
+                                                    <p class="mb-1">Zavrsene rezervacije</p>
+                                                    <h4 class="mb-1">KM 350</h4>
+                                                    <p class="mb-0">
+                                                        <span class="me-2">33 rezervacije</span><span class="badge bg-label-success">+12.4%</span>
+                                                    </p>
+                                                </div>
+                                                <span class="avatar p-2 me-lg-6">
+                            <span class="avatar-initial rounded"
+                            ><i class="icon-base ti tabler-device-laptop icon-28px text-success"></i
+                            ></span>
+                          </span>
+                                            </div>
+                                            <hr class="d-none d-sm-block d-lg-none" />
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div
+                                                    class="d-flex justify-content-between align-items-start border-end pb-4 pb-sm-0 card-widget-3">
+                                                <div>
+                                                    <p class="mb-1">Otkazane rezervacije</p>
+                                                    <h4 class="mb-1">KM 20</h4>
+                                                    <p class="mb-0">2 rezervacije</p>
+                                                </div>
+                                                <span class="avatar p-2 me-sm-6">
+                            <span class="avatar-initial rounded"
+                            ><i class="icon-base ti tabler-cancel icon-28px text-danger"></i
+                            ></span>
+                          </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-3">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <p class="mb-1">Ostalo</p>
+                                                    <h4 class="mb-1">---</h4>
+                                                    <p class="mb-0">
+                                                        <span class="me-2">---</span><span class="badge bg-label-danger">---</span>
+                                                    </p>
+                                                </div>
+                                                <span class="avatar p-2">
+                            <span class="avatar-initial rounded"
+                            ><i class="icon-base ti tabler-wallet icon-28px text-heading"></i
+                            ></span>
+                          </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--   Usluge & bookings Start-->
+                    <div class="row mb-6 g-6">
+                        <div class="col-6 col-xl-6">
+
+                            <!-- Basic Bootstrap Table -->
+                            <div class="card h-100">
+                                <div class="card-header  d-flex align-items-center justify-content-between">
+                                    <h5 class="card-header">Vaše usluge</h5>
+                                    <button
+                                            type="button"
+                                            class="btn btn-primary btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalTop">
+                                        <i class="icon-base ti tabler-circle-plus icon-md"></i>
+                                    </button>
+                                </div>
+
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Usluga</th>
+                                            <th>Trajanje(min)</th>
+                                            <th>Cijena</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <i class="icon-base ti tabler-brand-angular icon-md text-danger me-4"></i>
+                                                <span class="fw-medium">Usluga 1</span>
+                                            </td>
+                                            <td>30 min</td>
+                                            <td>12 KM</td>
+                                            <td><span class="badge bg-label-primary me-1">Active</span></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                        <i class="icon-base ti tabler-dots-vertical"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="icon-base ti tabler-pencil me-1"></i> Edit</a
+                                                        >
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="icon-base ti tabler-trash me-1"></i> Delete</a
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <i class="icon-base ti tabler-brand-angular icon-md text-danger me-4"></i>
+                                                <span class="fw-medium">Usluga 1</span>
+                                            </td>
+                                            <td>30 min</td>
+                                            <td>12 KM</td>
+                                            <td><span class="badge bg-label-success me-1">Completed</span></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                        <i class="icon-base ti tabler-dots-vertical"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="icon-base ti tabler-pencil me-2"></i> Edit</a
+                                                        >
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="icon-base ti tabler-trash me-2"></i> Delete</a
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <i class="icon-base ti tabler-brand-angular icon-md text-danger me-4"></i>
+                                                <span class="fw-medium">Usluga 1</span>
+                                            </td>
+                                            <td>30 min</td>
+                                            <td>12 KM</td>
+                                            <td><span class="badge bg-label-warning me-1">Pending</span></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                        <i class="icon-base ti tabler-dots-vertical"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="icon-base ti tabler-pencil me-2"></i> Edit</a
+                                                        >
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="icon-base ti tabler-trash me-2"></i> Delete</a
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--/ Basic Bootstrap Table -->
+
+                        </div>
+
+
+                        <div class="col-6 col-xl-6">
+
+                            <!-- INFO:START -->
+                            <div class="col-xl">
+                                <div class="card terminko-back-image">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Vaše informacije</h5>
+                                        <small class="text-body-secondary float-end">---</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/upload" method="POST"  enctype="multipart/form-data" id="my-form">
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-fullname">Naziv</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-fullname2" class="input-group-text"
+                            ><i class="icon-base ti tabler-building"></i
+                            ></span>
+                                                    <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="basic-icon-default-fullname"
+                                                            placeholder="Naziv..."
+                                                            aria-label="Naziv..."
+                                                            aria-describedby="basic-icon-default-fullname2" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-company">Company</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                            ><i class="icon-base ti tabler-address-book"></i
+                            ></span>
+                                                    <input
+                                                            type="text"
+                                                            id="basic-icon-default-company"
+                                                            class="form-control"
+                                                            placeholder="ACME Inc."
+                                                            aria-label="ACME Inc."
+                                                            aria-describedby="basic-icon-default-company2" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-email">Email</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span class="input-group-text"><i class="icon-base ti tabler-mail"></i></span>
+                                                    <input
+                                                            type="text"
+                                                            id="basic-icon-default-email"
+                                                            class="form-control"
+                                                            placeholder="john.doe"
+                                                            aria-label="john.doe"
+                                                            aria-describedby="basic-icon-default-email2" />
+                                                    <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
+                                                </div>
+                                                <div class="form-text">You can use letters, numbers & periods</div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-phone">Phone No</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-phone2" class="input-group-text"
+                            ><i class="icon-base ti tabler-phone"></i
+                            ></span>
+                                                    <input
+                                                            type="text"
+                                                            id="basic-icon-default-phone"
+                                                            class="form-control phone-mask"
+                                                            placeholder="658 799 8941"
+                                                            aria-label="658 799 8941"
+                                                            aria-describedby="basic-icon-default-phone2" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-message">Message</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-message2" class="input-group-text"
+                            ><i class="icon-base ti tabler-message-dots"></i
+                            ></span>
+                                                    <textarea
+                                                            id="basic-icon-default-message"
+                                                            class="form-control"
+                                                            placeholder="Hi, Do you have a moment to talk Joe?"
+                                                            aria-label="Hi, Do you have a moment to talk Joe?"
+                                                            aria-describedby="basic-icon-default-message2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-message">Logo</label>
+                                                <br>
+                                                <input type="file" name="logo" id="logo" required>
+
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Send</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/  INFO:END  -->
+
+                        </div>
+                    </div>
+                    <!--  Usluge & bookings  End-->
+
+
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div class="card-title mb-0">
+                                <h5 class="m-0 me-2">Rezervacije</h5>
+                            </div>
+                            <div class="dropdown">
+                                <button
+                                        class="btn text-body-secondary p-0"
+                                        type="button"
+                                        id="popularInstructors"
+                                        data-bs-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <i class="icon-base ti tabler-dots-vertical icon-22px"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="popularInstructors">
+                                    <!--                      <a class="dropdown-item" href="javascript:void(0);">Select All</a>-->
+                                    <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                                    <!--                      <a class="dropdown-item" href="javascript:void(0);">Share</a>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Usluga</th>
+                                    <th>Korisnik</th>
+                                    <th>Datum vrijeme</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                <tr>
+                                    <td>Usluga 1</td>
+                                    <td>
+                                        <div class="avatar avatar me-4">
+                                            <img src="assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+                                        </div>
+                                    </td>
+                                    <td>11.5.2025/14:00</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="icon-base ti tabler-circle-check icon-md"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="icon-base ti tabler-circle-x icon-md"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Usluga 1</td>
+                                    <td>
+                                        <div class="avatar avatar me-4">
+                                            <img src="assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+                                        </div>
+                                    </td>
+                                    <td>11.5.2025/14:00</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="icon-base ti tabler-circle-check icon-md"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="icon-base ti tabler-circle-x icon-md"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Usluga 1</td>
+                                    <td>
+                                        <div class="avatar avatar me-4">
+                                            <img src="assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+                                        </div>
+                                    </td>
+                                    <td>11.5.2025/14:00</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="icon-base ti tabler-circle-check icon-md"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="icon-base ti tabler-circle-x icon-md"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+
+
+                            <!--                  <div class="d-flex justify-content-between align-items-center mb-6">-->
+                            <!--                    <div class="d-flex align-items-center">-->
+                            <!--                      <div class="avatar avatar me-4">-->
+                            <!--                        <img src="assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />-->
+                            <!--                      </div>-->
+                            <!--                      <div>-->
+                            <!--                        <div>-->
+                            <!--                          <h6 class="mb-0 text-truncate">name surname</h6>-->
+                            <!--                          <small class="text-truncate text-body">Business Intelligence</small>-->
+                            <!--                        </div>-->
+                            <!--                      </div>-->
+                            <!--                    </div>-->
+                            <!--                    <div class="text-end">-->
+                            <!--                      <h6 class="mb-0">Usluga 1</h6>-->
+                            <!--                    </div>-->
+                            <!--                  </div>-->
+
+                        </div>
+                    </div>
+
+
+                    <!-- Slide from Top Modal -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="mt-4">
+                            <!-- Button trigger modal -->
+                            <!--              <button-->
+                            <!--                type="button"-->
+                            <!--                class="btn btn-primary"-->
+                            <!--                data-bs-toggle="modal"-->
+                            <!--                data-bs-target="#modalTop">-->
+                            <!--                Nova usluga-->
+                            <!--              </button>-->
+
+                            <!-- Modal -->
+                            <div class="modal modal-top fade mt-7" id="modalTop" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <form class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalTopTitle">Dodaj novu uslugu</h5>
+                                            <button
+                                                    type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="">
+                                                <div class="col mb-4">
+                                                    <label for="nameSlideTop" class="form-label">Naziv</label>
+                                                    <input
+                                                            type="text"
+                                                            id="nameSlideTop"
+                                                            class="form-control"
+                                                            placeholder="Enter Name" />
+                                                </div>
+                                                <div class="col mb-4">
+                                                    <label for="priceSlideTop" class="form-label">Cijena</label>
+                                                    <input
+                                                            type="text"
+                                                            id="priceSlideTop"
+                                                            class="form-control"
+                                                            placeholder="Enter price" />
+                                                </div>
+                                                <div class="col mb-4">
+                                                    <label for="durationSlideTop" class="form-label">Trajanje</label>
+                                                    <input
+                                                            type="text"
+                                                            id="durationSlideTop"
+                                                            class="form-control"
+                                                            placeholder="Enter duration" />
+                                                </div>
+                                            </div>
+                                            <!--                      <div class="row g-4">-->
+                                            <!--                        <div class="col mb-0">-->
+                                            <!--                          <label for="emailSlideTop" class="form-label">Email</label>-->
+                                            <!--                          <input-->
+                                            <!--                            type="email"-->
+                                            <!--                            id="emailSlideTop"-->
+                                            <!--                            class="form-control"-->
+                                            <!--                            placeholder="xxxx@xxx.xx" />-->
+                                            <!--                        </div>-->
+                                            <!--                        <div class="col mb-0">-->
+                                            <!--                          <label for="dobSlideTop" class="form-label">DOB</label>-->
+                                            <!--                          <input type="date" id="dobSlideTop" class="form-control" />-->
+                                            <!--                        </div>-->
+                                            <!--                      </div>-->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide from Top Modal END -->
+
+
+                    <!-- Basic Card-->
+                    <div class="card">
+                        <div class="d-flex card-header flex-column flex-md-row border-bottom mx-0 px-3 justify-content-between">
+                            <h5 class="">Usluge</h5>
+                            <button
+                                    type="button"
+                                    class="btn btn-primary btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalTop">
+                                <i class="icon-base ti tabler-circle-plus icon-md"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam at atque cum delectus ducimus
+                                ea error illo, impedit iusto nemo nesciunt nihil odio, officia quia recusandae reprehenderit sapiente
+                                tempore.
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--/ Basic Card-->
+
+                    <!-- Product List Table - Datatable -->
+                    <!--            <div class="card m-3">-->
+                    <!--              <div class="card-header border-bottom">-->
+                    <!--                <h5 class="card-title">Filter</h5>-->
+                    <!--                <div class="d-flex justify-content-between align-items-center row pt-4 gap-6 gap-md-0 g-md-6">-->
+                    <!--                  <div class="col-md-4 product_status"></div>-->
+                    <!--                  <div class="col-md-4 product_category"></div>-->
+                    <!--                  <div class="col-md-4 product_stock"></div>-->
+                    <!--                </div>-->
+                    <!--              </div>-->
+                    <!--              <div class="card-datatable">-->
+                    <!--                <table class="datatables-products table">-->
+                    <!--                  <thead class="border-top">-->
+                    <!--                  <tr>-->
+                    <!--                    <th></th>-->
+                    <!--                    <th></th>-->
+                    <!--                    <th>product</th>-->
+                    <!--                    <th>category</th>-->
+                    <!--                    <th>stock</th>-->
+                    <!--                    <th>sku</th>-->
+                    <!--                    <th>price</th>-->
+                    <!--                    <th>qty</th>-->
+                    <!--                    <th>status</th>-->
+                    <!--                    <th>actions</th>-->
+                    <!--                  </tr>-->
+                    <!--                  </thead>-->
+                    <!--                </table>-->
+                    <!--              </div>-->
+                    <!--            </div>-->
+                    <!--          </div>-->
+                    <!--/ Content -->
+                </div>
+                <!--/ Content -->
+
+                <!-- Footer -->
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl">
+
+                    </div>
+                </footer>
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!--/ Content wrapper -->
+        </div>
+
+        <!--/ Layout container -->
+    </div>
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+
+<!-- Drag Target Area To SlideIn Menu On Small Screens -->
+<div class="drag-target"></div>
+
+<!--/ Layout wrapper -->
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/theme.js -->
+
+<script src="assets/vendor/libs/jquery/jquery.js"></script>
+
+<script src="assets/vendor/libs/popper/popper.js"></script>
+<script src="assets/vendor/js/bootstrap.js"></script>
+<script src="assets/vendor/libs/node-waves/node-waves.js"></script>
+
+<script src="assets/vendor/libs/@algolia/autocomplete-js.js"></script>
+
+<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+<script src="assets/vendor/libs/hammer/hammer.js"></script>
+
+<script src="assets/vendor/js/menu.js"></script>
+
+<!-- endbuild -->
+<script src="assets/vendor/js/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="assets/vendor/js/select2/select2.js"></script>
+
+<!-- Vendors JS -->
+
+<!-- Main JS -->
+

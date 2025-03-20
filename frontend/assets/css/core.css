@@ -26569,7 +26569,7 @@ li:not(:first-child) .dropdown-item, .dropdown-menu .dropdown-item:not(:first-ch
   position: relative;
   z-index: 2;
   flex-wrap: nowrap;
-  block-size: 3.5rem;
+  /*block-size: 3.5rem;*/
   color: var(--bs-body-color);
   padding-block: 0.5rem;
 }
