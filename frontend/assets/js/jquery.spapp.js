@@ -54,6 +54,8 @@
       }
     }
 
+    this.getTemplateDir = function() { return config.templateDir; }
+
     // and run
     this.run = function() {
       window.addEventListener('hashchange', function() { routeChange(); });
