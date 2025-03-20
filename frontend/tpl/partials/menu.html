@@ -1,0 +1,166 @@
+<!-- Navbar: Start -->
+<nav class="layout-navbar shadow-none py-0">
+    <div class="container">
+        <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-8">
+            <!-- Menu logo wrapper: Start -->
+            <div class="navbar-brand app-brand demo d-flex py-0 me-4 me-xl-8 ms-0">
+                <!-- Mobile menu toggle: Start-->
+                <button
+                        class="navbar-toggler border-0 px-0 me-4"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="icon-base ti tabler-menu-2 icon-lg align-middle text-heading fw-medium"></i>
+                </button>
+                <!-- Mobile menu toggle: End-->
+                <a href="index.html" class="app-brand-link">
+                <span class="app-brand-logo demo">
+                  <span class="text-primary">
+                  <img src="assets/img/logo/terminko_logo.png" height="75" /></span>
+                </span>
+                    <span class="app-brand-text demo menu-text fw-bold text-heading">Terminko</span>
+                </a>
+            </div>
+            <!-- Menu logo wrapper: End -->
+            <!-- Menu wrapper: Start -->
+            <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
+                <button
+                        class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="icon-base ti tabler-x icon-lg"></i>
+                </button>
+
+
+
+            </div>
+            <div class="landing-menu-overlay d-lg-none"></div>
+            <!-- Menu wrapper: End -->
+            <!-- Toolbar: Start -->
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Style Switcher -->
+                <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1 ">
+                    <a
+                            class="nav-link dropdown-toggle hide-arrow"
+                            id="nav-theme"
+                            href="javascript:void(0);"
+                            data-bs-toggle="dropdown">
+                        <i class="icon-base ti tabler-sun icon-lg theme-icon-active"></i>
+                        <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
+                        <li>
+                            <button
+                                    type="button"
+                                    class="dropdown-item align-items-center active"
+                                    data-bs-theme-value="light"
+                                    id="light"
+                                    aria-pressed="false">
+                                <span><i class="icon-base ti tabler-sun icon-md me-3" data-icon="sun"></i>Light</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                    type="button"
+                                    class="dropdown-item align-items-center"
+                                    data-bs-theme-value="dark"
+                                    id="dark"
+                                    aria-pressed="true">
+                                <span><i class="icon-base ti tabler-moon-stars icon-md me-3" data-icon="moon-stars"></i>Dark</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                    type="button"
+                                    class="dropdown-item align-items-center"
+                                    data-bs-theme-value="system"
+                                    aria-pressed="false">
+                    <span
+                    ><i
+                            class="icon-base ti tabler-device-desktop-analytics icon-md me-3"
+                            data-icon="device-desktop-analytics"></i
+                    >System</span
+                    >
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- / Style Switcher-->
+
+                <!-- navbar button: Start -->
+                <li>
+                    <a href="auth-login-basic.html" class="btn btn-primary" target="_self"
+                    ><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span
+                    ><span class="d-none d-md-block">Login/Register</span></a
+                    >
+                </li>
+                <!-- navbar button: End -->
+            </ul>
+            <!-- Toolbar: End -->
+        </div>
+    </div>
+</nav>
+<!-- Navbar: End -->
+
+<script>
+
+
+    function setTheme (mode = 'auto') {
+        console.log('set-theme')
+        // const theme = toggle.getAttribute('data-bs-theme-value');
+        console.log("🚀 ~ setTheme ~ theme: ", mode);
+
+        const userMode = localStorage.getItem('bs-theme');
+        const sysMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+        const useSystem = mode === 'system' || (!userMode && mode === 'auto');
+        const modeChosen = useSystem ? 'system' : mode === 'dark' || mode === 'light' ? mode : userMode;
+
+        if (useSystem) {
+            localStorage.removeItem('bs-theme');
+        } else {
+            localStorage.setItem('bs-theme', modeChosen);
+        }
+
+        document.documentElement.setAttribute('data-bs-theme', useSystem ? (sysMode ? 'light' : 'dark') : modeChosen);
+        document.querySelectorAll('.mode-switch .btn').forEach(e => e.classList.remove('text-body'));
+        document.getElementById(modeChosen).classList.add('text-body');
+    }
+
+
+    const nav = document.querySelector('.layout-navbar'),
+        animationImg = document.querySelectorAll('.hero-dashboard-img'),
+        animationElements = document.querySelectorAll('.hero-elements-img');
+;
+
+    console.log("🚀 ~  ~ nav: ", nav);
+    nav.addEventListener('mousemove', function parallax(e) {
+        animationElements.forEach(layer => {
+            layer.style.transform = 'translateZ(1rem)';
+        });
+        animationImg.forEach(layer => {
+            let x = (window.innerWidth - e.pageX * 2) / 100;
+            let y = (window.innerHeight - e.pageY * 2) / 100;
+            layer.style.transform = `perspective(1200px) rotateX(${y}deg) rotateY(${x}deg) scale3d(1, 1, 1)`;
+        });
+    });
+
+
+
+    document.querySelectorAll('[data-bs-theme-value]').forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const theme = toggle.getAttribute('data-bs-theme-value');
+            console.log("🚀 ~  ~ theme: ", theme);
+            setTheme(theme);
+
+        });
+    });
+
+</script>
