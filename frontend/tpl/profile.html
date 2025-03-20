@@ -1,0 +1,175 @@
+
+
+
+
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
+    <div class="layout-container">
+
+        <div class="row">
+            {{dashboard_menu}}
+        </div>
+
+        <!-- Layout container -->
+        <div class="layout-page" style="margin-top: 100px !important;">
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+
+
+                <!-- Content -->
+                <div class="container-xxl flex-grow-1 container-p-y">
+
+                    <!--   Usluge & bookings Start-->
+                    <div class="row mb-6 g-6">
+
+                        <div class="col-12 col-xl-12">
+
+                            <!-- INFO:START -->
+                            <div class="col-xl">
+                                <div class="card terminko-back-image">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Vaše informacije</h5>
+                                        <small class="text-body-secondary float-end">---</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/upload" method="POST"  enctype="multipart/form-data" id="my-form">
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-fullname">Naziv</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-fullname2" class="input-group-text"
+                            ><i class="icon-base ti tabler-building"></i
+                            ></span>
+                                                    <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="basic-icon-default-fullname"
+                                                            placeholder="Naziv..."
+                                                            aria-label="Naziv..."
+                                                            aria-describedby="basic-icon-default-fullname2" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-company">Company</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-company2" class="input-group-text"
+                            ><i class="icon-base ti tabler-address-book"></i
+                            ></span>
+                                                    <input
+                                                            type="text"
+                                                            id="basic-icon-default-company"
+                                                            name="company"
+                                                            class="form-control"
+                                                            placeholder="ACME Inc."
+                                                            aria-label="ACME Inc."
+                                                            aria-describedby="basic-icon-default-company2" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-email">Email</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span class="input-group-text"><i class="icon-base ti tabler-mail"></i></span>
+                                                    <input
+                                                            type="text"
+                                                            id="basic-icon-default-email"
+                                                            name="email"
+                                                            class="form-control"
+                                                            placeholder="john.doe"
+                                                            aria-label="john.doe"
+                                                            aria-describedby="basic-icon-default-email2" />
+                                                    <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
+                                                </div>
+                                                <div class="form-text">You can use letters, numbers & periods</div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-phone">Phone No</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-phone2" class="input-group-text"
+                            ><i class="icon-base ti tabler-phone"></i
+                            ></span>
+                                                    <input
+                                                            type="text"
+                                                            id="basic-icon-default-phone"
+                                                            name="phone_no"
+                                                            class="form-control phone-mask"
+                                                            placeholder="658 799 8941"
+                                                            aria-label="658 799 8941"
+                                                            aria-describedby="basic-icon-default-phone2" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-message">Message</label>
+                                                <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-message2" class="input-group-text"
+                            ><i class="icon-base ti tabler-message-dots"></i
+                            ></span>
+                                                    <textarea
+                                                            id="basic-icon-default-message"
+                                                            name="message"
+                                                            class="form-control"
+                                                            placeholder="Hi, Do you have a moment to talk Joe?"
+                                                            aria-label="Hi, Do you have a moment to talk Joe?"
+                                                            aria-describedby="basic-icon-default-message2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-message">Logo</label>
+                                                <br>
+                                                <input type="file" name="logo" id="logo">
+
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Send</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/  INFO:END  -->
+
+                        </div>
+                    </div>
+                    <!--  Usluge & bookings  End-->
+
+
+
+                    <!-- Footer -->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl">
+
+                        </div>
+                    </footer>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!--/ Content wrapper -->
+            </div>
+
+            <!--/ Layout container -->
+        </div>
+    </div>
+
+
+
+<!--    &lt;!&ndash;/ Layout wrapper &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Core JS &ndash;&gt;-->
+<!--    &lt;!&ndash; build:js assets/vendor/js/theme.js &ndash;&gt;-->
+
+<!--    <script src="assets/vendor/libs/jquery/jquery.js"></script>-->
+
+<!--    <script src="assets/vendor/libs/popper/popper.js"></script>-->
+<!--    <script src="assets/vendor/js/bootstrap.js"></script>-->
+<!--    <script src="assets/vendor/libs/node-waves/node-waves.js"></script>-->
+
+<!--    <script src="assets/vendor/libs/@algolia/autocomplete-js.js"></script>-->
+
+<!--    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>-->
+
+<!--    <script src="assets/vendor/libs/hammer/hammer.js"></script>-->
+
+<!--    <script src="assets/vendor/js/menu.js"></script>-->
+
+<!--    &lt;!&ndash; endbuild &ndash;&gt;-->
+<!--    <script src="assets/vendor/js/datatables-bs5/datatables-bootstrap5.js"></script>-->
+<!--    <script src="assets/vendor/js/select2/select2.js"></script>-->
+

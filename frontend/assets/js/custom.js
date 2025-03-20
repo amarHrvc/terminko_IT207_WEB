@@ -167,6 +167,23 @@ $(document).ready(function () {
         }
     });
 
+    app.route({
+        view: 'profile',
+
+        onCreate: function () {
+            $("#index").append("MANAGE CALLED");
+            loadCss('core');
+            // loadCss('front-page/swiper/swiper');
+            // loadCss('front-page/front-page');
+            // loadCss('front-page/front-page-landing');
+            // loadCss('demo');
+
+        },
+        onReady: function () {
+
+        }
+    });
+
 
     // run app
     app.run();
