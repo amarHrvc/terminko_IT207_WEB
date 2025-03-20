@@ -3,6 +3,8 @@ $(document).ready(function() {
   $("main#spapp > section").height($(document).height() - 60);
 
   var app = $.spapp({pageNotFound : 'error_404'}); // initialize
+  console.log("🚀 ~ $ ~ app:", app);
+
 
   // Funkcija za učitavanje reusable dijelova
   function loadCommonParts(data) {
@@ -32,6 +34,16 @@ $(document).ready(function() {
       });
     }
   
+}
+
+function loadCss(view) {
+  console.log("🚀 ~ loadCss ~ view:", view)
+  
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'assets/css/' + view + '.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
 }
 
 
@@ -73,6 +85,8 @@ $(document).ready(function() {
     view: 'view_1',
     onCreate: function() {
       $("#view_1").append($.now()+': Written on create<br/>'); 
+      loadCss('view_1');
+      loadCss('header');
        },
     onReady: function() {
 

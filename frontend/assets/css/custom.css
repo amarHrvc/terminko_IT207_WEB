@@ -53,7 +53,7 @@ nav { height:50px; line-height:50px; background:#00acc1; position:fixed; top:0; 
 nav ul li { display:block; float:left; width:33.33%; text-align:center; }
 nav ul li a { color:#fff; text-decoration:none; }
 
-main#spapp > section { padding:60px 10px 10px 10px; background:#ffcdd2; }  
+main#spapp > section { padding:60px 10px 10px 10px; }  
 main#spapp > section#view_2 { background:#90caf9; }  
 main#spapp > section#view_3 { background:#a5d6a7; } 
 main#spapp > section#error_404 { background:#b71c1c; color:#fff; }
