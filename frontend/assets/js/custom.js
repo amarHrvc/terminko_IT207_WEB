@@ -57,6 +57,7 @@ $(document).ready(function () {
 
         options.onCreate = function () {
             console.log("🚀 ~ $ ~ originalOnCreate:", originalOnCreate)
+            console.log("🚀 ~ $ ~ $(this)[0]:", $(this)[0])
 
             loadCommonParts($(this)[0]);
             // laodTemplate($(this));
@@ -100,6 +101,7 @@ $(document).ready(function () {
             $("#view_3").append("I'm the third view");
         }
     });
+
     app.route({
         view: 'index',
         onCreate: function () {
@@ -110,6 +112,25 @@ $(document).ready(function () {
             loadCss('front-page/front-page-landing');
             // loadCss('demo');
 
+        }
+    });
+
+    app.route({
+        view: 'service',
+
+        onCreate: function () {
+            $("#index").append("SERVICE CALLED");
+            // loadCss('core');
+            // loadCss('front-page/swiper/swiper');
+            // loadCss('front-page/front-page');
+            // loadCss('front-page/front-page-landing');
+            // loadCss('demo');
+
+        },
+        onReady: function () {
+            $.getScript("assets/js/service_detail.js", function() {
+                console.log("JavaScript for exampleView loaded.");
+            });
         }
     });
 

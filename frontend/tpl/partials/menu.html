@@ -39,6 +39,25 @@
                 </button>
 
 
+<!--                      NAVBAR      -->
+                            <ul class="navbar-nav me-auto">
+                              <li class="nav-item">
+                                <a class="nav-link fw-medium" aria-current="page" href="#index">Home</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link fw-medium" href="#service">Service</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link fw-medium" href="landing-page.html#landingTeam">Dashboard</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link fw-medium" href="landing-page.html#landingFAQ">FAQ</a>
+                              </li>
+
+                            </ul>
+<!--                      NAVBAR      -->
+
+
 
             </div>
             <div class="landing-menu-overlay d-lg-none"></div>
@@ -112,7 +131,7 @@
 
 <script>
 
-
+(function() {
     function setTheme (mode = 'auto') {
         console.log('set-theme')
         // const theme = toggle.getAttribute('data-bs-theme-value');
@@ -135,13 +154,13 @@
     }
 
 
-    const nav = document.querySelector('.layout-navbar'),
+    let navbar = document.querySelector('.layout-navbar'),
         animationImg = document.querySelectorAll('.hero-dashboard-img'),
         animationElements = document.querySelectorAll('.hero-elements-img');
-;
 
-    console.log("🚀 ~  ~ nav: ", nav);
-    nav.addEventListener('mousemove', function parallax(e) {
+
+    console.log("🚀 ~  ~ navbar: ", navbar);
+    navbar.addEventListener('mousemove', function parallax(e) {
         animationElements.forEach(layer => {
             layer.style.transform = 'translateZ(1rem)';
         });
@@ -162,5 +181,9 @@
 
         });
     });
+
+
+
+    })();
 
 </script>
