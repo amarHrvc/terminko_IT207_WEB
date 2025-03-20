@@ -85,6 +85,7 @@ $(document).ready(function () {
             $("#view_1").append($.now() + ': Written on create<br/>');
             loadCss('view_1');
             loadCss('header');
+            loadCss('header');
         },
         onReady: function () {
 
@@ -97,6 +98,18 @@ $(document).ready(function () {
         view: 'view_3',
         onCreate: function () {
             $("#view_3").append("I'm the third view");
+        }
+    });
+    app.route({
+        view: 'index',
+        onCreate: function () {
+            $("#index").append("INDEX CALLED");
+            loadCss('core');
+            loadCss('front-page/swiper/swiper');
+            loadCss('front-page/front-page');
+            loadCss('front-page/front-page-landing');
+            // loadCss('demo');
+
         }
     });
 
