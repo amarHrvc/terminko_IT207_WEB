@@ -133,6 +133,22 @@ $(document).ready(function () {
             });
         }
     });
+    app.route({
+        view: 'dashboard',
+
+        onCreate: function () {
+            $("#index").append("dashboard CALLED");
+            loadCss('core');
+            // loadCss('front-page/swiper/swiper');
+            // loadCss('front-page/front-page');
+            // loadCss('front-page/front-page-landing');
+            // loadCss('demo');
+
+        },
+        onReady: function () {
+
+        }
+    });
 
 
     // run app
