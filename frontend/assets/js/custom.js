@@ -184,6 +184,57 @@ $(document).ready(function () {
         }
     });
 
+    app.route({
+        view: 'login',
+
+        onCreate: function () {
+            $("#index").append("MANAGE CALLED");
+            loadCss('core');
+            // loadCss('front-page/swiper/swiper');
+            // loadCss('front-page/front-page');
+            // loadCss('front-page/front-page-landing');
+            // loadCss('demo');
+
+        },
+        onReady: function () {
+
+        }
+    });
+
+    app.route({
+        view: 'register',
+
+        onCreate: function () {
+            $("#index").append("REGISTER CALLED");
+            loadCss('core');
+            // loadCss('front-page/swiper/swiper');
+            // loadCss('front-page/front-page');
+            // loadCss('front-page/front-page-landing');
+            // loadCss('demo');
+
+        },
+        onReady: function () {
+
+        }
+    });
+
+    app.route({
+        view: 'forgot-password',
+
+        onCreate: function () {
+            $("#index").append("forgot-password CALLED");
+            loadCss('core');
+            // loadCss('front-page/swiper/swiper');
+            // loadCss('front-page/front-page');
+            // loadCss('front-page/front-page-landing');
+            // loadCss('demo');
+
+        },
+        onReady: function () {
+
+        }
+    });
+
 
     // run app
     app.run();
