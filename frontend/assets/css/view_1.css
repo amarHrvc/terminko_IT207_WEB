@@ -1,0 +1,11 @@
+body {
+    background-color: lightblue !important;
+  }
+  
+#view_1{
+    background-color: lightgreen;
+}
+
+  #view_1 h1 {
+    color: darkblue;
+  }

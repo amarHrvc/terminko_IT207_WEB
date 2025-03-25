@@ -1,0 +1,447 @@
+
+    <!-- Core CSS -->
+    <!-- build:css assets/vendor/css/theme.css  -->
+
+    <link rel="stylesheet" href="assets/vendor/libs/node-waves/node-waves.css" />
+
+    <link rel="stylesheet" href="assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="assets/css/demo.css" />
+
+    <link rel="stylesheet" href="assets/vendor/css/pages/front-page.css" />
+
+    <!-- Vendors CSS -->
+
+    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/jquery-timepicker/jquery-timepicker.css" />
+
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="assets/vendor/libs/nouislider/nouislider.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/swiper/swiper.css" />
+
+    <!-- Page CSS -->
+
+    <link rel="stylesheet" href="assets/vendor/css/pages/front-page-landing.css" />
+
+
+    <link rel="stylesheet" href="assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <link rel="stylesheet" href="assets/vendor/libs/flatpickr/flatpickr.css" />
+    <!-- Row Group CSS -->
+    <link rel="stylesheet" href="assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css" />
+    <!-- Form Validation -->
+    <link rel="stylesheet" href="assets/vendor/libs/@form-validation/form-validation.css" />
+
+    <!-- Helpers -->
+<!--    <script src="assets/vendor/js/helpers.js"></script>-->
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+
+<!--    <script src="assets/js/config.js"></script>-->
+
+<body>
+<!--<script src="assets/vendor/js/dropdown-hover.js"></script>-->
+<!-- <script src="assets/vendor/js/mega-dropdown.js"></script> -->
+{{menu}}
+
+<!-- Sections:Start -->
+
+<div data-bs-spy="scroll" class="scrollspy-example">
+    <!-- Hero: Start -->
+    <section id="hero-animation">
+        <div id="landingHero" class="section-py landing-hero position-relative">
+            <img src="assets/img/front-pages/backgrounds/hero-bg.png" alt="hero background"
+                 class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1" />
+            <div class="container">
+                <div class="card h-100">
+                    <img class="card-img-top" src="assets/img/logo/posao_ph_1.jpg" alt="Card image cap" />
+                    <div class="card-body">
+                        <h5 class="card-title">Naziv posla</h5>
+                        <p class="card-text">
+                            OPIS
+                        </p>
+
+                        <div class="col-12">
+                            <div class="col-12 col-xl-12">
+
+                                <!-- Basic Bootstrap Table -->
+                                <div class="card h-100">
+                                    <div class="card-header  d-flex align-items-center justify-content-between">
+                                        <h5 class="card-header">Napravite rezervaciju</h5>
+
+                                    </div>
+
+                                    <div class="table-responsive text-nowrap">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Usluga</th>
+                                                <th>Trajanje(min)</th>
+                                                <th>Cijena</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="table-border-bottom-0">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <i class="icon-base ti tabler-brand-angular icon-md text-danger me-4"></i>
+                                                    <span class="fw-medium">Usluga 1</span>
+                                                </td>
+                                                <td>30 min</td>
+                                                <td>12 KM</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-sm" onclick="window.addService()">
+                                                        <i class="icon-base ti tabler-circle-plus icon-md"></i>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <i class="icon-base ti tabler-brand-angular icon-md text-danger me-4"></i>
+                                                    <span class="fw-medium">Usluga 1</span>
+                                                </td>
+                                                <td>30 min</td>
+                                                <td>12 KM</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-sm">
+                                                        <i class="icon-base ti tabler-circle-plus icon-md"></i>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <i class="icon-base ti tabler-brand-angular icon-md text-danger me-4"></i>
+                                                    <span class="fw-medium">Usluga 1</span>
+                                                </td>
+                                                <td>30 min</td>
+                                                <td>12 KM</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-sm">
+                                                        <i class="icon-base ti tabler-circle-plus icon-md"></i>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <div class="card h-100 mt-3 d-none" id="addService">
+                                    <div class="card-header  d-flex align-items-center justify-content-between">
+                                        <h5 class="card-header">Usluga 1</h5>
+                                        <div class="text-end">
+                                            <button
+                                                    type="button"
+                                                    class="btn-close"
+                                                    aria-label="Close"
+                                                    onclick="window.closeService()"
+                                            >
+                                            </button>
+                                            <br>
+                                            Trajanje: 30 min
+                                            <br>
+                                            Cijena: 12 KM
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="container">
+                                            <h3 class="mb-4 text-center">Izaberite termin</h3>
+                                            <div class="row mb-4">
+                                                <div class="col-12 col-md-6">
+                                                    <label for="dateId" class="form-label">Datum</label>
+                                                    <input id="dateId" class="form-control" type="date" onchange="getTimeSlots(this.value)" />
+                                                </div>
+
+                                            </div>
+                                            <div id="timeSlots" class="row row-cols-2 row-cols-md-4 g-3">
+                                                <!-- Time slots will be dynamically generated here -->
+                                            </div>
+                                            <div class="text-center">
+                                                <button id="confirmBooking" class="btn btn-primary mt-4" disabled>Potvrdi</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+                                </div>
+
+
+
+
+                                <!--/ Basic Bootstrap Table -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="landing-hero-blank"></div> -->
+    </section>
+    <!-- Hero: End -->
+
+    <section id="bookingSection" class="section-py bg-body">
+
+    </section>
+
+    <section class="section-py">
+    </section>
+
+
+    <!-- CTA: Start -->
+    <section id="landingCTA" class="section-py landing-cta position-relative p-lg-0 pb-0">
+        <img src="assets/img/front-pages/backgrounds/cta-bg-light.png"
+             class="position-absolute bottom-0 end-0 scaleX-n1-rtl h-100 w-100 z-n1" alt="cta image"
+             data-app-light-img="front-pages/backgrounds/cta-bg-light.png"
+             data-app-dark-img="front-pages/backgrounds/cta-bg-dark.png" />
+        <div class="container">
+            <div class="row align-items-center gy-12">
+                <div class="col-lg-6 text-start text-sm-center text-lg-start">
+                    <h3 class="cta-title text-primary fw-bold mb-1">Spremni da počnete !</h3>
+                    <h5 class="text-body mb-8">registrujte Vaš posao</h5>
+                    <a href="#login" class="btn btn-lg btn-primary">Počnite</a>
+                </div>
+                <div class="col-lg-6 pt-lg-12 text-center text-lg-end">
+                    <img src="assets/img/front-pages/landing-page/cta-dashboard.png" alt="cta dashboard"
+                         class="img-fluid mt-lg-4" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA: End -->
+
+    <!-- Contact Us: Start -->
+    <section id="landingContact" class="section-py bg-body landing-contact">
+        <!--        <div class="container">-->
+        <!--          <div class="text-center mb-4">-->
+        <!--            <span class="badge bg-label-primary">Contact US</span>-->
+        <!--          </div>-->
+        <!--          <h4 class="text-center mb-1">-->
+        <!--            <span class="position-relative fw-extrabold z-1"-->
+        <!--              >Let's work-->
+        <!--              <img-->
+        <!--                src="assets/img/front-pages/icons/section-title-icon.png"-->
+        <!--                alt="laptop charging"-->
+        <!--                class="section-title-img position-absolute object-fit-contain bottom-0 z-n1" />-->
+        <!--            </span>-->
+        <!--            together-->
+        <!--          </h4>-->
+        <!--          <p class="text-center mb-12 pb-md-4">Any question or remark? just write us a message</p>-->
+        <!--          <div class="row g-6">-->
+        <!--            <div class="col-lg-5">-->
+        <!--              <div class="contact-img-box position-relative border p-2 h-100">-->
+        <!--                <img-->
+        <!--                  src="assets/img/front-pages/icons/contact-border.png"-->
+        <!--                  alt="contact border"-->
+        <!--                  class="contact-border-img position-absolute d-none d-lg-block scaleX-n1-rtl" />-->
+        <!--                <img-->
+        <!--                  src="assets/img/front-pages/landing-page/contact-customer-service.png"-->
+        <!--                  alt="contact customer service"-->
+        <!--                  class="contact-img w-100 scaleX-n1-rtl" />-->
+        <!--                <div class="p-4 pb-2">-->
+        <!--                  <div class="row g-4">-->
+        <!--                    <div class="col-md-6 col-lg-12 col-xl-6">-->
+        <!--                      <div class="d-flex align-items-center">-->
+        <!--                        <div class="badge bg-label-primary rounded p-1_5 me-3">-->
+        <!--                          <i class="icon-base ti tabler-mail icon-lg"></i>-->
+        <!--                        </div>-->
+        <!--                        <div>-->
+        <!--                          <p class="mb-0">Email</p>-->
+        <!--                          <h6 class="mb-0">-->
+        <!--                            <a href="mailto:example@gmail.com" class="text-heading">example@gmail.com</a>-->
+        <!--                          </h6>-->
+        <!--                        </div>-->
+        <!--                      </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="col-md-6 col-lg-12 col-xl-6">-->
+        <!--                      <div class="d-flex align-items-center">-->
+        <!--                        <div class="badge bg-label-success rounded p-1_5 me-3">-->
+        <!--                          <i class="icon-base ti tabler-phone-call icon-lg"></i>-->
+        <!--                        </div>-->
+        <!--                        <div>-->
+        <!--                          <p class="mb-0">Phone</p>-->
+        <!--                          <h6 class="mb-0"><a href="tel:+1234-568-963" class="text-heading">+1234 568 963</a></h6>-->
+        <!--                        </div>-->
+        <!--                      </div>-->
+        <!--                    </div>-->
+        <!--                  </div>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <div class="col-lg-7">-->
+        <!--              <div class="card h-100">-->
+        <!--                <div class="card-body">-->
+        <!--                  <h4 class="mb-2">Send a message</h4>-->
+        <!--                  <p class="mb-6">-->
+        <!--                    If you would like to discuss anything related to payment, account, licensing,<br-->
+        <!--                      class="d-none d-lg-block" />-->
+        <!--                    partnerships, or have pre-sales questions, you’re at the right place.-->
+        <!--                  </p>-->
+        <!--                  <form>-->
+        <!--                    <div class="row g-4">-->
+        <!--                      <div class="col-md-6">-->
+        <!--                        <label class="form-label" for="contact-form-fullname">Full Name</label>-->
+        <!--                        <input type="text" class="form-control" id="contact-form-fullname" placeholder="john" />-->
+        <!--                      </div>-->
+        <!--                      <div class="col-md-6">-->
+        <!--                        <label class="form-label" for="contact-form-email">Email</label>-->
+        <!--                        <input-->
+        <!--                          type="text"-->
+        <!--                          id="contact-form-email"-->
+        <!--                          class="form-control"-->
+        <!--                          placeholder="johndoe@gmail.com" />-->
+        <!--                      </div>-->
+        <!--                      <div class="col-12">-->
+        <!--                        <label class="form-label" for="contact-form-message">Message</label>-->
+        <!--                        <textarea-->
+        <!--                          id="contact-form-message"-->
+        <!--                          class="form-control"-->
+        <!--                          rows="7"-->
+        <!--                          placeholder="Write a message"></textarea>-->
+        <!--                      </div>-->
+        <!--                      <div class="col-12">-->
+        <!--                        <button type="submit" class="btn btn-primary">Send inquiry</button>-->
+        <!--                      </div>-->
+        <!--                    </div>-->
+        <!--                  </form>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+    </section>
+    <!-- Contact Us: End -->
+</div>
+
+<!-- / Sections:End -->
+
+<!-- Footer: Start -->
+<footer class="landing-footer bg-body footer-text">
+    <div class="footer-top position-relative overflow-hidden z-1">
+        <img src="assets/img/front-pages/backgrounds/footer-bg.png" alt="footer bg"
+             class="footer-bg banner-bg-img z-n1" />
+        <div class="container">
+
+        </div>
+    </div>
+    <div class="footer-bottom py-3 py-md-5">
+        <div class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
+        </div>
+    </div>
+</footer>
+<!-- Footer: End -->
+
+
+<!-- Modal -->
+<div class="modal modal-top fade mt-7" id="modalTop" tabindex="-1">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTopTitle">Rezervisite {ime_usluge}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="col mb-4">
+                        <label for="dateId" class="form-label">Datum</label>
+                        <input id="dateId" class="form-control" type="datetime-local" />
+
+                    </div>
+                    <div class="col mb-4">
+
+                        <label for="timepicker-step" class="form-label">Step</label>
+                        <input type="text" id="timepicker-step" placeholder="HH:MMam" class="form-control" />
+
+
+                    </div>
+
+                </div>
+                <!--                      <div class="row g-4">-->
+                <!--                        <div class="col mb-0">-->
+                <!--                          <label for="emailSlideTop" class="form-label">Email</label>-->
+                <!--                          <input-->
+                <!--                            type="email"-->
+                <!--                            id="emailSlideTop"-->
+                <!--                            class="form-control"-->
+                <!--                            placeholder="xxxx@xxx.xx" />-->
+                <!--                        </div>-->
+                <!--                        <div class="col mb-0">-->
+                <!--                          <label for="dobSlideTop" class="form-label">DOB</label>-->
+                <!--                          <input type="date" id="dobSlideTop" class="form-control" />-->
+                <!--                        </div>-->
+                <!--                      </div>-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/theme.js -->
+<!--<script src="assets/vendor/libs/jquery/jquery.js"></script>-->
+
+<!--<script src="assets/vendor/libs/popper/popper.js"></script>-->
+<!--<script src="assets/vendor/js/bootstrap.js"></script>-->
+<!--<script src="assets/vendor/libs/node-waves/node-waves.js"></script>-->
+
+<!--<script src="assets/vendor/libs/@algolia/autocomplete-js.js"></script>-->
+
+<!--<script src="assets/vendor/libs/pickr/pickr.js"></script>-->
+
+<!--&lt;!&ndash; endbuild &ndash;&gt;-->
+
+<!--&lt;!&ndash; Vendors JS &ndash;&gt;-->
+<!--<script src="assets/vendor/libs/nouislider/nouislider.js"></script>-->
+<!--<script src="assets/vendor/libs/swiper/swiper.js"></script>-->
+
+
+<!--<script src="assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>-->
+<!--&lt;!&ndash; Flat Picker &ndash;&gt;-->
+<!--<script src="assets/vendor/libs/moment/moment.js"></script>-->
+<!--<script src="assets/vendor/libs/flatpickr/flatpickr.js"></script>-->
+
+
+<!--&lt;!&ndash; Form Validation &ndash;&gt;-->
+<!--<script src="assets/vendor/libs/@form-validation/popular.js"></script>-->
+<!--<script src="assets/vendor/libs/@form-validation/bootstrap5.js"></script>-->
+<!--<script src="assets/vendor/libs/@form-validation/auto-focus.js"></script>-->
+
+
+<!--<script src="assets/vendor/libs/moment/moment.js"></script>-->
+<!--<script src="assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>-->
+<!--<script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>-->
+
+
+<!-- Main JS -->
+
+
+<script src="assets/js/service_detail.js"></script>
+
+
