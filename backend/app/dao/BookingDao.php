@@ -28,9 +28,6 @@ class BookingDao extends BaseDao
             ) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())
         ');
 
-        Helpers::testOutput('CREATE BOOKING');
-        Helpers::testOutput($data);
-
         $stmt->execute([
             $data['tenant_id'],
             $data['user_id'],

@@ -19,7 +19,6 @@ beforeEach(function () use (&$faker, &$ratingData) {
 });
 
 test('can add a  new rating', function () use (&$dao, &$faker, &$ratingData) {
-    Helpers::testOutput($ratingData);
     $id = $dao->create($ratingData);
 
     expect($id)->toBeGreaterThan(0);
@@ -27,7 +26,6 @@ test('can add a  new rating', function () use (&$dao, &$faker, &$ratingData) {
     $booking = $dao->findById($id);
     expect($booking)->not->toBeNull()
         ->and($booking->rater_user_id)->toBe($ratingData['rater_user_id']);
-
 });
 
 it('can find all ratings', function () use (&$dao, &$faker, &$ratingData) {
@@ -39,7 +37,6 @@ it('can find all ratings', function () use (&$dao, &$faker, &$ratingData) {
 
     expect($services)->not->toBeNull()
         ->and(count($services))->toBeGreaterThanOrEqual(2);
-
 });
 
 it('can update a rating', function () use (&$dao, &$faker, &$ratingData) {

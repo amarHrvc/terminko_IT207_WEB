@@ -38,7 +38,6 @@ class Helpers
     public static function getUserId(\Faker\Generator $faker): int
     {
         $tenantData = self::getUserData($faker);
-        Helpers::testOutput('@@@@@@@getUserId');
 
         return new UserDao()->create($tenantData);
     }
@@ -50,7 +49,6 @@ class Helpers
     public static function getBookingId(\Faker\Generator $faker): int
     {
         $bookingData = self::getBookingData($faker);
-        Helpers::testOutput('@@@@@@@getUserId');
 
         return new BookingDao()->create($bookingData);
     }

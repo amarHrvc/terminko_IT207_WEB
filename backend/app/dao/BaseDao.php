@@ -24,9 +24,7 @@ abstract class BaseDao implements DaoInterface
         $stmt->execute([$id]);
         $result = $stmt->fetch();
 
-        Helpers::testOutput($result);
-        Helpers::testOutput(' \n --- ' . $this->modelClass);
-//
+
 //        return $result ? new $this->modelClass($result) : null;
         return $result ?  $this->modelClass::fromArray($result) : null;
     }
