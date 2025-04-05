@@ -62,20 +62,20 @@ class Tenant
 
     public static function fromArray(array $data): self
     {
-        $tenant = new self();
-        $tenant->id = (int)($data['id'] ?? 0);
-        $tenant->name = $data['name'];
-        $tenant->slug = $data['slug'] ?? null;
-        $tenant->phone = $data['phone'] ?? null;
-        $tenant->email = $data['email'] ?? null;
-        $tenant->address = $data['address'] ?? null;
-        $tenant->city = $data['city'] ?? null;
-        $tenant->country = $data['country'] ?? null;
-        $tenant->postalCode = $data['postal_code'] ?? null;
-        $tenant->operatingHours = json_decode($data['operating_hours_json'] ?? '[]', true);
-        $tenant->createdAt = $data['created_at'] ?? null;
-        $tenant->updatedAt = $data['updated_at'] ?? null;
-        return $tenant;
+        return new self(
+            (int)($data['id'] ?? 0),
+            $data['name'] ?? '',
+            $data['slug'] ?? null,
+            $data['phone'] ?? null,
+            $data['email'] ?? null,
+            $data['address'] ?? null,
+            $data['city'] ?? null,
+            $data['country'] ?? null,
+            $data['postal_code'] ?? null,
+            json_decode($data['operating_hours_json'] ?? '[]', true),
+            $data['created_at'] ?? null,
+            $data['updated_at'] ?? null
+        );
     }
 
     public function toArray(): array

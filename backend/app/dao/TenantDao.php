@@ -18,14 +18,23 @@ class TenantDao extends BaseDao
     public function create(array $data): int
     {
         $stmt = $this->db->prepare('
-            INSERT INTO tenants (name, description, user_id, created_at) 
-            VALUES (?, ?, ?, NOW())
+            INSERT INTO tenants (
+                name, slug, phone, email, address,
+                city, country, postal_code,
+                operating_hours_json, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
         ');
 
         $stmt->execute([
             $data['name'],
-            $data['description'] ?? null,
-            $data['user_id']
+            $data['slug'],
+            $data['phone'],
+            $data['email'],
+            $data['address'],
+            $data['city'],
+            $data['country'],
+            $data['postal_code'],
+            $data['operating_hours_json'] ?  $data['operating_hours_json'] : null
         ]);
 
         return (int)$this->db->lastInsertId();
@@ -47,5 +56,15 @@ class TenantDao extends BaseDao
         }
 
         return $tenants;
+    }
+
+
+    public function findByEmail(string $email): ?Tenant
+    {
+        $stmt = $this->db->prepare('SELECT * FROM tenants WHERE email = ?');
+        $stmt->execute([$email]);
+        $tenant = $stmt->fetch();
+
+        return $tenant ? Tenant::fromArray($tenant) : null;
     }
 }

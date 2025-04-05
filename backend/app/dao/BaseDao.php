@@ -7,7 +7,6 @@ use App\Helpers\Helpers;
 use PDO;
 use Pest\Plugins\Parallel\Handlers\Pest;
 
-
 abstract class BaseDao implements DaoInterface
 {
     protected PDO $db;
@@ -26,7 +25,8 @@ abstract class BaseDao implements DaoInterface
         $result = $stmt->fetch();
 
 //        Helpers::testOutput($result);
-        return $result ? new $this->modelClass($result) : null;
+//        return $result ? new $this->modelClass($result) : null;
+        return $result ?  $this->modelClass::fromArray($result) : null;
     }
 
     public function findAll(): array
@@ -35,7 +35,7 @@ abstract class BaseDao implements DaoInterface
         $results = [];
 
         while ($row = $stmt->fetch()) {
-            $results[] = new $this->modelClass($row);
+            $results[] = $this->modelClass::fromArray($row);
         }
 
         return $results;
