@@ -4,7 +4,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "app/",
+            "Tests\\": "tests/"
         }
     },
     "authors": [
@@ -15,17 +16,27 @@
     ],
     "require": {
         "php": "^8.4",
-        "flightphp/core": "^3.15"
+        "flightphp/core": "^3.15",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "pestphp/pest": "^3.8",
         "phpstan/phpstan": "^2.1",
         "squizlabs/php_codesniffer": "^3.12",
-        "friendsofphp/php-cs-fixer": "^3.75"
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "fakerphp/faker": "^1.24"
     },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "process-timeout": 0
+    },
+    "scripts": {
+        "test": "@php vendor/bin/pest --colors=always",
+        "analyse": "@php -d PHPSTAN_COLORS=always vendor/bin/phpstan analyse app public tests --level=5 --ansi",
+        "sniff": "@php vendor/bin/phpcs app public --standard=PSR12 --colors",
+        "fix": "@putenv PHP_CS_FIXER_IGNORE_ENV=1 && @php vendor/bin/php-cs-fixer fix app public --ansi",
+        "serve": "@php -S localhost:8080 -t public"
     }
 }
