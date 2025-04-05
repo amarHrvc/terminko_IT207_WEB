@@ -31,5 +31,4 @@ class UserController
     public function destroy(string $id): void
     {
     }
-
 }

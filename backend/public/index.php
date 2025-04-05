@@ -14,7 +14,7 @@ Flight::path(__DIR__ . '/../app');
 //prep app variable
 $app = Flight::app();
 
-//load routes 
+//load routes
 require __DIR__ . '/../app/routes/routes.php';
 
 
