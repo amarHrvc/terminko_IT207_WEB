@@ -1,9 +1,8 @@
 <?php
 
 use App\Dao\TenantDao;
-use Tests\Db\DatabaseHelper;
-use Faker\Factory;
 use App\Helpers\Helpers;
+use Faker\Factory;
 
 $dao = null;
 $tenantData = null;
@@ -14,29 +13,8 @@ beforeAll(function () use (&$dao, &$faker) {
     $faker = Factory::create();
 });
 
-/**
- * @param \Faker\Generator|null $faker
- * @return array
- */
-function getTenantData(\Faker\Generator $faker): array
-{
-    return [
-        'name' => $faker->company(),
-        'slug' => $faker->unique()->slug(),
-        'phone' => $faker->phoneNumber(),
-        'email' => $faker->unique()->companyEmail(),
-        'address' => $faker->streetAddress(),
-        'city' => $faker->city(),
-        'country' => $faker->country(),
-        'postal_code' => $faker->postcode(),
-        'operating_hours_json' => json_encode(['open' => '08:00', 'close' => '18:00']),
-        'created_at' => date('Y-m-d H:i:s'),
-        'updated_at' => date('Y-m-d H:i:s')
-    ];
-}
-
 beforeEach(function () use (&$faker, &$tenantData) {
-    $tenantData = getTenantData($faker);
+    $tenantData = Helpers::getTenantData($faker);
 });
 
 test('can create a new Tenant', function () use (&$dao, &$faker, &$tenantData) {
@@ -53,7 +31,7 @@ test('can create a new Tenant', function () use (&$dao, &$faker, &$tenantData) {
 
 it('can find all tenants', function () use (&$dao, &$faker, &$tenantData) {
     $tenant1 = $dao->create($tenantData);
-    $tenantData = getTenantData($faker);
+    $tenantData = Helpers::getTenantData($faker);
     $tenant2 = $dao->create($tenantData);
 
     $allTenants = $dao->findAll();

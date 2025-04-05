@@ -1,9 +1,8 @@
 <?php
 
 use App\Dao\UserDao;
-use Tests\Db\DatabaseHelper;
-use Faker\Factory;
 use App\Helpers\Helpers;
+use Faker\Factory;
 
 $dao = null;
 $userData = null;
@@ -18,7 +17,7 @@ beforeAll(function () use (&$dao, &$faker) {
  * @param \Faker\Generator|null $faker
  * @return array
  */
-function getTenantData(\Faker\Generator $faker): array
+function getUserData(\Faker\Generator $faker): array
 {
     return [
         'name' => $faker->name(),
@@ -28,7 +27,7 @@ function getTenantData(\Faker\Generator $faker): array
 }
 
 beforeEach(function () use (&$faker, &$userData) {
-    $userData = getTenantData($faker);
+    $userData = getUserData($faker);
 });
 
 test('can create a new user', function () use (&$dao, &$faker, &$userData) {
@@ -46,7 +45,7 @@ test('can create a new user', function () use (&$dao, &$faker, &$userData) {
 it('can find all users', function () use (&$dao, &$faker, &$userData) {
     $id1 = $dao->create($userData);
     $name1 = $userData['name'];
-    $userData = getTenantData($faker);
+    $userData = getUserData($faker);
     $id2 = $dao->create($userData);
     $name2 = $userData['name'];
     $user1 = $dao->findById($id1);

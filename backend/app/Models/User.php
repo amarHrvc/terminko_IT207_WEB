@@ -38,6 +38,12 @@ class User
         $this->updated_at = $data['updated_at'];
     }
 
+    public static function fromArray(array $data): self
+    {
+        return new self($data);
+    }
+
+
     /**
      * @return mixed
      */
