@@ -15,24 +15,10 @@ beforeAll(function () use (&$dao, &$faker) {
     $faker = Factory::create();
 });
 
-/**
- * @param \Faker\Generator|null $faker
- * @return array
- */
-function getServiceData(\Faker\Generator $faker): array
-{
-    return [
-        'tenant_id' => Helpers::getTenantId($faker),
-        'name' => $faker->name(),
-        'description' => $faker->words(11, true),
-        'price' => $faker->randomFloat(2, 10, 50),
-        'duration_minutes' => $faker->randomElement([10, 15, 30]),
-        'is_active' => true
-    ];
-}
+
 
 beforeEach(function () use (&$faker, &$serviceData) {
-    $serviceData = getServiceData($faker);
+    $serviceData = Helpers::getServiceData($faker);
 });
 
 test('can add a  new service', function () use (&$dao, &$faker, &$serviceData) {
@@ -48,7 +34,7 @@ test('can add a  new service', function () use (&$dao, &$faker, &$serviceData) {
 
 it('can find all services', function () use (&$dao, &$faker, &$serviceData) {
     $id1 = $dao->create($serviceData);
-    $serviceData = getServiceData($faker);
+    $serviceData = Helpers::getServiceData($faker);
     $id2 = $dao->create($serviceData);
 
     $services = $dao->findAll();

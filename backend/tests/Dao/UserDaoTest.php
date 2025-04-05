@@ -17,17 +17,10 @@ beforeAll(function () use (&$dao, &$faker) {
  * @param \Faker\Generator|null $faker
  * @return array
  */
-function getUserData(\Faker\Generator $faker): array
-{
-    return [
-        'name' => $faker->name(),
-        'email' => $faker->unique()->email(),
-        'password' => 'secret123'
-    ];
-}
+
 
 beforeEach(function () use (&$faker, &$userData) {
-    $userData = getUserData($faker);
+    $userData = Helpers::getUserData($faker);
 });
 
 test('can create a new user', function () use (&$dao, &$faker, &$userData) {
@@ -45,7 +38,7 @@ test('can create a new user', function () use (&$dao, &$faker, &$userData) {
 it('can find all users', function () use (&$dao, &$faker, &$userData) {
     $id1 = $dao->create($userData);
     $name1 = $userData['name'];
-    $userData = getUserData($faker);
+    $userData = Helpers::getUserData($faker);
     $id2 = $dao->create($userData);
     $name2 = $userData['name'];
     $user1 = $dao->findById($id1);
