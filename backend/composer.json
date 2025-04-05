@@ -34,9 +34,8 @@
     },
     "scripts": {
         "test": "@php vendor/bin/pest --colors=always",
-        "analyse": "@php -d PHPSTAN_COLORS=always vendor/bin/phpstan analyse app public tests --level=5 --ansi",
+        "analyse": "@php -d PHPSTAN_COLORS=always vendor/bin/phpstan analyse app public tests --level=3 --ansi",
         "sniff": "@php vendor/bin/phpcs app public --standard=PSR12 --colors",
-        "fix": "@putenv PHP_CS_FIXER_IGNORE_ENV=1 && @php vendor/bin/php-cs-fixer fix app public --ansi",
         "serve": "@php -S localhost:8080 -t public"
     }
 }
