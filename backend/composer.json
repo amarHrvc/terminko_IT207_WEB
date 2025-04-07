@@ -1,0 +1,41 @@
+{
+    "name": "amarhrvc/terminko",
+    "description": "Booking and appointment scheduling platform designed for service-based businesses",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "amar.hajrovic",
+            "email": "amar.hajrovic@stu.ibu.edu.ba"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "flightphp/core": "^3.15",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.8",
+        "phpstan/phpstan": "^2.1",
+        "squizlabs/php_codesniffer": "^3.12",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "fakerphp/faker": "^1.24"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "process-timeout": 0
+    },
+    "scripts": {
+        "test": "@php vendor/bin/pest --debug --colors=always",
+        "analyse": "@php -d PHPSTAN_COLORS=always vendor/bin/phpstan analyse app public tests --level=3 --ansi",
+        "sniff": "@php vendor/bin/phpcs app public --standard=PSR12 --colors",
+        "serve": "@php -S localhost:8080 -t public"
+    }
+}
