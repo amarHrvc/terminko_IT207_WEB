@@ -47,16 +47,9 @@ abstract class BaseDao implements DaoInterface
         return $stmt->execute([$id]);
     }
 
-
-    protected function executeUpdate(int $id, array $data): bool
+    function update(int $id, array $data): bool
     {
-        $fields = [];
-        $values = [];
-
-        foreach ($data as $key => $value) {
-            $fields[] = "$key = ?";
-            $values[] = $value;
-        }
+        list($fields, $values) = $this->prepeareArayDataForSql($data, true);
 
         $values[] = $id;
         $sql = "UPDATE {$this->table} SET " . implode(', ', $fields) . ' WHERE id = ?';
@@ -64,4 +57,49 @@ abstract class BaseDao implements DaoInterface
         $stmt = $this->db->prepare($sql);
         return $stmt->execute($values);
     }
+
+    public function create(array $data): int
+    {
+        list($fields, $values) = $this->prepeareArayDataForSql($data);
+        // Build placeholders for prepared statement
+        $placeholders = array_fill(0, count($fields), '?');
+
+        // Build SQL string
+        $stmt = sprintf(
+            "INSERT INTO %s (%s) VALUES (%s)",
+            $this->table,
+            implode(', ', $fields),
+            implode(', ', $placeholders)
+        );
+
+        $stmt = $this->db->prepare($stmt);
+
+        $stmt->execute($values);
+
+        return (int)$this->db->lastInsertId();
+    }
+
+    /**
+     * @param array $data
+     * @return array[]
+     */
+    private function prepeareArayDataForSql(array $data, bool $forUpdate = false): array
+    {
+        $fields = [];
+        $values = [];
+
+        foreach ($data as $column => $value) {
+            if ($forUpdate) {
+                $fields[] = "$column = ?";
+            } else {
+                $fields[] = $column;
+            }
+            $values[] = $value;
+        }
+
+        return [$fields, $values];
+    }
+
+
+
 }

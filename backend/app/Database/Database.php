@@ -5,6 +5,7 @@ namespace App\Database;
 use PDO;
 use PDOException;
 
+
 class Database
 {
     private static ?PDO $instance = null;

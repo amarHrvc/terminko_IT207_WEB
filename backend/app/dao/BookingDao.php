@@ -40,8 +40,5 @@ class BookingDao extends BaseDao
         return (int)$this->db->lastInsertId();
     }
 
-    public function update(int $id, array $data): bool
-    {
-        return $this->executeUpdate($id, $data);
-    }
+
 }

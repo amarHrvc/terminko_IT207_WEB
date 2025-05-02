@@ -11,7 +11,7 @@ class UserFactory
             $data['tenant_id'] ?? null,
             $data['name'] ?? null,
             $data['email'] ?? null,
-            $data['password_hash'] ?? null,
+            $data['password'] ?? null,
             $data['phone'] ?? null,
             $data['role'] ?? null,
             $data['created_at'] ?? null,

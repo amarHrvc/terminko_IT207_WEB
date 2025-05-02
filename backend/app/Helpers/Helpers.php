@@ -38,7 +38,6 @@ class Helpers
     public static function getUserId(\Faker\Generator $faker): int
     {
         $tenantData = self::getUserData($faker);
-
         return new UserDao()->create($tenantData);
     }
 
@@ -72,9 +71,10 @@ class Helpers
     }
     public static function getUserData(\Faker\Generator $faker): array
     {
+        $faker = Factory::create();
         return [
             'name' => $faker->name(),
-            'email' => $faker->unique()->email(),
+            'email' => $faker->unique()->safeEmail(),
             'password' => 'secret123'
         ];
     }
@@ -83,6 +83,7 @@ class Helpers
     public static function getRatingData(\Faker\Generator $faker): array
     {
         $id1 = Helpers::getUserId($faker);
+        $faker = Factory::create();
         $id2 = Helpers::getUserId($faker);
         $bookingId = Helpers::getBookingId($faker);
 
@@ -90,7 +91,7 @@ class Helpers
             'rater_user_id' => $id1,
             'rated_user_id' => $id2,
             'booking_id' =>  $bookingId,
-            'rating_value' => $faker->randomFloat(2, 10, 50),
+            'rating_value' => $faker->numberBetween(1, 5),
             'rating_comment' => $faker->randomElement([10, 15, 30]),
             'attendance_status' => true
         ];

@@ -7,12 +7,19 @@ ini_set('display_startup_errors', 1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ .'/..');
+$dotenv->load();
+
 // Set the application path
 Flight::path(__DIR__ . '/../app');
 
 
 //prep app variable
 $app = Flight::app();
+
+//Extend flight
+require __DIR__ . '/../app/dao/daoRegister.php';
+
 
 //load routes
 require __DIR__ . '/../app/routes/routes.php';

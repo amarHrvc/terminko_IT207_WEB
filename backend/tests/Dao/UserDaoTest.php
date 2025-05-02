@@ -32,7 +32,7 @@ test('can create a new user', function () use (&$dao, &$faker, &$userData) {
     expect($user)->not->toBeNull()
         ->and($user->getName())->toBe($userData['name'])
         ->and($user->getEmail())->toBe($userData["email"])
-        ->and(password_verify($userData['password'], $user->getPasswordHash()))->toBeTrue();
+        ->and(password_verify($userData['password'], $user->getPassword()))->toBeTrue();
 });
 
 it('can find all users', function () use (&$dao, &$faker, &$userData) {

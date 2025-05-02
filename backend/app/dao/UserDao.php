@@ -13,30 +13,6 @@ class UserDao extends BaseDao
         $this->modelClass = User::class;
     }
 
-    public function create(array $data): int
-    {
-        $stmt = $this->db->prepare('
-            INSERT INTO users (name, email, password_hash, created_at) 
-            VALUES (?, ?, ?, NOW())
-        ');
-
-        $stmt->execute([
-            $data['name'],
-            $data['email'],
-            password_hash($data['password'], PASSWORD_DEFAULT)
-        ]);
-
-        return (int)$this->db->lastInsertId();
-    }
-
-    public function update(int $id, array $data): bool
-    {
-        if (isset($data['password'])) {
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-        }
-        return $this->executeUpdate($id, $data);
-    }
-
     public function findByEmail(string $email): ?User
     {
         $stmt = $this->db->prepare('SELECT * FROM users WHERE email = ?');
@@ -44,5 +20,13 @@ class UserDao extends BaseDao
         $user = $stmt->fetch();
 
         return $user ? new User($user) : null;
+    }
+
+    public function create($data):int
+    {
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        return parent::create($data);
+
     }
 }
