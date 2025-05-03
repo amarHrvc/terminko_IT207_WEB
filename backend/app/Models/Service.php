@@ -52,6 +52,7 @@ class Service
     public function toArray(): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,

@@ -34,6 +34,7 @@ class Rating
     public function toArray(): array
     {
         return [
+            'id' => $this->id,
             'rater_user_id' => $this->rater_user_id,
             'rated_user_id' => $this->rated_user_id,
             'booking_id' => $this->booking_id,

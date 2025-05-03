@@ -81,6 +81,7 @@ class Tenant
     public function toArray(): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
             'phone' => $this->phone,
