@@ -7,6 +7,7 @@ use App\Dao\UserDao;
 use Faker\Extension\Helper;
 use Faker\Factory;
 use App\Dao\TenantDao;
+use Flight;
 
 class Helpers
 {

@@ -2,33 +2,34 @@
 
 namespace App\Controller;
 
-class UserController
+use Flight;
+
+class UserController extends BaseController
 {
-    public function index(): void
+    public function __construct()
     {
+        $userDao = Flight::UserDao();
+        parent::__construct($userDao);
     }
 
-    public function show(string $id): void
+    public function index()
     {
+
+        $users = $this->dao->findAll();
+        return (Flight::getArrayFromModels($users));
+
     }
 
-    public function create(): void
+    public function show(string $id): array
     {
+        $userById = Flight::UserDao()->findById($id);
+        return ($userById ? $userById->toArray() : []);
+
     }
 
-    public function store(): void
+    public function update(array $data)
     {
+        return Flight::UserDao()->update($data['id'], $data);
     }
 
-    public function edit(string $id): void
-    {
-    }
-
-    public function update(string $id): void
-    {
-    }
-
-    public function destroy(string $id): void
-    {
-    }
 }

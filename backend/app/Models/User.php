@@ -187,4 +187,21 @@ class User
     {
         $this->updated_at = $updated_at;
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'tenant_id' => $this->tenant_id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+            'phone' => $this->phone,
+            'role' => $this->role,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
+
+    }
+
 }

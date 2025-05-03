@@ -12,4 +12,9 @@ class RatingDao extends BaseDao
         $this->table = 'ratings';
         $this->modelClass = Rating::class;
     }
+
+    public function status()
+    {
+        var_dump("STAT !!!!");
+    }
 }
