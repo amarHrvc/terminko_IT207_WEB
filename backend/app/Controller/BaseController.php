@@ -4,6 +4,12 @@ namespace App\Controller;
 
 use App\Dao\BaseDao;
 
+#[\OpenApi\Attributes\Info(
+    title: "Test API REST",
+    version: "latest",
+    description: "test",
+)]
+
 class BaseController
 {
     protected $dao;

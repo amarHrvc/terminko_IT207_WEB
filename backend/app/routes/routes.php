@@ -1,12 +1,12 @@
 <?php
-
 namespace App\Routes;
 
-use App\Controller\UserController;
 use Flight;
 use Flight\Engine;
-use http\Env\Request;
 use SebastianBergmann\LinesOfCode\IllogicalValuesException;
+
+
+
 
 /** @var Engine $app */
 
@@ -58,6 +58,12 @@ Flight::group('/api/v1/', function () {
     //Users
     Flight::group('/users', function () {
 
+        /**
+         * @OA\Get(
+         *     path="/api/v1/users",
+         *     @OA\Response(response="200", description="Get all users")
+         * )
+         */
         Flight::route('/', function () {
             Flight::jsonResponse(Flight::UserController()->index(), 200, JSON_PRETTY_PRINT);
         });
