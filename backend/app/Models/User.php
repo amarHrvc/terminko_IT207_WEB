@@ -8,7 +8,7 @@ class User
     private $tenant_id;
     private $name;
     private $email;
-    private $password_hash;
+    private $password;
     private $phone;
     private $role;
     private $created_at;
@@ -19,7 +19,7 @@ class User
      * @param $tenant_id
      * @param $name
      * @param $email
-     * @param $password_hash
+     * @param $password
      * @param $phone
      * @param $role
      * @param $created_at
@@ -31,7 +31,7 @@ class User
         $this->tenant_id = $data['tenant_id'];
         $this->name = $data['name'];
         $this->email = $data['email'];
-        $this->password_hash = $data['password_hash'];
+        $this->password = $data['password'];
         $this->phone = $data['phone'];
         $this->role = $data['role'];
         $this->created_at = $data['created_at'];
@@ -111,17 +111,17 @@ class User
     /**
      * @return mixed
      */
-    public function getPasswordHash()
+    public function getPassword()
     {
-        return $this->password_hash;
+        return $this->password;
     }
 
     /**
-     * @param mixed $password_hash
+     * @param mixed $password
      */
-    public function setPasswordHash($password_hash): void
+    public function setPassword($password): void
     {
-        $this->password_hash = $password_hash;
+        $this->password = $password;
     }
 
     /**
@@ -187,4 +187,21 @@ class User
     {
         $this->updated_at = $updated_at;
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'tenant_id' => $this->tenant_id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+            'phone' => $this->phone,
+            'role' => $this->role,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
+
+    }
+
 }

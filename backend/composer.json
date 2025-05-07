@@ -17,7 +17,10 @@
     "require": {
         "php": "^8.4",
         "flightphp/core": "^3.15",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.6",
+        "robmorgan/phinx": "^0.16.7",
+        "zircote/swagger-php": "^5.1"
     },
     "require-dev": {
         "pestphp/pest": "^3.8",
@@ -34,6 +37,8 @@
     },
     "scripts": {
         "test": "@php vendor/bin/pest --debug --colors=always",
+        "migrate": "@php vendor/bin/phinx migrate",
+        "phinx": "@php vendor/bin/phinx",
         "analyse": "@php -d PHPSTAN_COLORS=always vendor/bin/phpstan analyse app public tests --level=3 --ansi",
         "sniff": "@php vendor/bin/phpcs app public --standard=PSR12 --colors",
         "serve": "@php -S localhost:8080 -t public"

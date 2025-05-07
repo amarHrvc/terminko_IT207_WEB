@@ -34,6 +34,7 @@ class Booking
     public function toArray(): array
     {
         return [
+            'id' => $this->id,
             'tenant_id' => $this->tenant_id,
             'user_id' => $this->user_id,
             'status' => $this->status,

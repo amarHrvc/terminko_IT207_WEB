@@ -5,6 +5,7 @@ namespace App\Database;
 use PDO;
 use PDOException;
 
+
 class Database
 {
     private static ?PDO $instance = null;
@@ -17,11 +18,10 @@ class Database
     {
         if (self::$instance === null) {
             try {
-                // TODO: Move these to environment variables
-                $host = 'localhost';
-                $dbname = 'terminko';
-                $username = 'root';
-                $password = '';
+                $host = $_ENV['DB_HOST'] ?? 'localhost';
+                $dbname = $_ENV['DB_NAME'] ?? 'terminko';
+                $username = $_ENV['DB_USER'] ?? 'root';
+                $password = $_ENV['DB_PASS'] ?? '';
 
                 self::$instance = new PDO(
                     "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
