@@ -3,6 +3,7 @@ namespace App\Routes;
 
 use Flight;
 use Flight\Engine;
+use phpDocumentor\Reflection\PseudoTypes\NonEmptyArray;
 use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 
 
@@ -64,12 +65,18 @@ Flight::group('/api/v1/', function () {
          *     @OA\Response(response="200", description="Get all users")
          * )
          */
+
         Flight::route('/', function () {
             Flight::jsonResponse(Flight::UserController()->index(), 200, JSON_PRETTY_PRINT);
         });
 
         Flight::route('GET /@id', function ($id) {
-            Flight::jsonResponse(Flight::UserController()->show($id), 200, JSON_PRETTY_PRINT);
+
+            $user = Flight::UserController()->show($id);
+            if ($user instanceof NonEmptyArray)
+                Flight::jsonResponse($user, 200, JSON_PRETTY_PRINT);
+            else
+                Flight::jsonResponse($user, 404, JSON_PRETTY_PRINT);
         });
 
         Flight::route('POST /@id', function ($id) {
