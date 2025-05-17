@@ -4,10 +4,12 @@ namespace App\Helpers;
 
 use App\Dao\BookingDao;
 use App\Dao\UserDao;
+use App\Models\Enums\UserRole;
 use Faker\Extension\Helper;
 use Faker\Factory;
 use App\Dao\TenantDao;
 use Flight;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Helpers
 {
@@ -70,14 +72,20 @@ class Helpers
             'updated_at' => date('Y-m-d H:i:s')
         ];
     }
-    public static function getUserData(\Faker\Generator $faker): array
+    public static function getUserData(\Faker\Generator $faker, bool $admin = false): array
     {
         $faker = Factory::create();
-        return [
-            'name' => $faker->name(),
-            'email' => $faker->unique()->safeEmail(),
-            'password' => 'secret123'
+        $pasword = $admin ? 'admin123' : 'secret123';
+        $name = $admin ? 'admin' : $faker->name();
+        $email = $admin ? 'admin@test.com' : $faker->unique()->safeEmail();
+        $userData = [
+            'name' => $name,
+            'email' => $email,
+            'password' => $pasword,
+            'role' => $admin ? UserRole::ADMIN->value : UserRole::CUSTOMER->value,
         ];
+
+        return $userData;
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Routes;
 use Flight;
 use Flight\Engine;
 use phpDocumentor\Reflection\PseudoTypes\NonEmptyArray;
+use PhpParser\Node\Expr\Throw_;
 use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 
 
@@ -55,20 +56,26 @@ use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 
 Flight::group('/api/v1/', function () {
 
+    Flight::route('POST /register', function () {
+        $data = Flight::request()->data;
+        $user = FLight::UserController()->register($data->getData());
+
+        Flight::jsonResponse($user, 200, JSON_PRETTY_PRINT);
+    });
+
+    Flight::route('POST /login', function () {
+        throw new Exception("Not implemented", 501);
+    });
+
 
     //Users
     Flight::group('/users', function () {
 
-        /**
-         * @OA\Get(
-         *     path="/api/v1/users",
-         *     @OA\Response(response="200", description="Get all users")
-         * )
-         */
 
-        Flight::route('/', function () {
+        Flight::route('GET /', function () {
             Flight::jsonResponse(Flight::UserController()->index(), 200, JSON_PRETTY_PRINT);
         });
+
 
         Flight::route('GET /@id', function ($id) {
 

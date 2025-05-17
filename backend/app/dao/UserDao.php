@@ -22,11 +22,10 @@ class UserDao extends BaseDao
         return $user ? new User($user) : null;
     }
 
-    public function create($data):int
+    public function create($data): int
     {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
         return parent::create($data);
-
     }
 }

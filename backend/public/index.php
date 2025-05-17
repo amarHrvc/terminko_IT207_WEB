@@ -1,5 +1,5 @@
 <?php
-
+const ROOT_PATH = __DIR__ . '/../';
 // Report all PHP errors
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

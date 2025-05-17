@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Enums\UserRole;
+
 class User
 {
     private $id;
@@ -10,7 +12,7 @@ class User
     private $email;
     private $password;
     private $phone;
-    private $role;
+    private UserRole $role;
     private $created_at;
     private $updated_at;
 
@@ -33,7 +35,7 @@ class User
         $this->email = $data['email'];
         $this->password = $data['password'];
         $this->phone = $data['phone'];
-        $this->role = $data['role'];
+        $this->role = UserRole::from($data['role']);
         $this->created_at = $data['created_at'];
         $this->updated_at = $data['updated_at'];
     }
@@ -143,7 +145,7 @@ class User
     /**
      * @return mixed
      */
-    public function getRole()
+    public function getRole(): UserRole
     {
         return $this->role;
     }
@@ -151,7 +153,7 @@ class User
     /**
      * @param mixed $role
      */
-    public function setRole($role): void
+    public function setRole(UserRole $role): void
     {
         $this->role = $role;
     }
@@ -188,7 +190,7 @@ class User
         $this->updated_at = $updated_at;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => $this->id,
@@ -197,11 +199,9 @@ class User
             'email' => $this->email,
             'password' => $this->password,
             'phone' => $this->phone,
-            'role' => $this->role,
+            'role' => $this->role->value,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
-
     }
-
 }
