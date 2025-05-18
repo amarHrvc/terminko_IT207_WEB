@@ -1,6 +1,8 @@
 <?php
 namespace App\Routes;
 
+use App\Middleware\AuthMiddleware;
+use App\Middleware\LogMiddleware;
 use Flight;
 use Flight\Engine;
 use phpDocumentor\Reflection\PseudoTypes\NonEmptyArray;
@@ -54,17 +56,36 @@ use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 //});
 
 
+
+
 Flight::group('/api/v1/', function () {
 
     Flight::route('POST /register', function () {
         $data = Flight::request()->data;
         $user = FLight::UserController()->register($data->getData());
 
+        if ($user['error'] == true) {
+            Flight::jsonResponse($user, 400, JSON_PRETTY_PRINT);
+            return;
+        }
         Flight::jsonResponse($user, 200, JSON_PRETTY_PRINT);
+
     });
 
     Flight::route('POST /login', function () {
-        throw new Exception("Not implemented", 501);
+
+        $data = Flight::UserController()->login(Flight::request()->data->getData());
+
+        if ($data['error'] == true) {
+            Flight::jsonResponse($data, 400, JSON_PRETTY_PRINT);
+            return;
+        }
+        $user = $data['user'];
+
+        unset($user['password']);
+
+        Flight::jsonResponse($user, 200, JSON_PRETTY_PRINT);
+
     });
 
 
@@ -86,19 +107,30 @@ Flight::group('/api/v1/', function () {
                 Flight::jsonResponse($user, 404, JSON_PRETTY_PRINT);
         });
 
+
+
         Flight::route('POST /@id', function ($id) {
             $data = Flight::request()->data;
             if ($data->id != $id)
                 throw new IllogicalValuesException("ID value missmatch");
 
             Flight::jsonResponse(Flight::UserController()->update($data->getData()), 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new LogMiddleware());
+
+
 
         Flight::route('DELETE /@id', function ($id) {
-            Flight::jsonResponse(Flight::UserController()->delete($id), 200, JSON_PRETTY_PRINT);
-        });
+            $userDeleted = Flight::UserController()->delete($id);
 
-    });
+            if($userDeleted)
+                Flight::jsonResponse(['success' => "User with id: $id deleted!"], 200, JSON_PRETTY_PRINT);
+            else
+                Flight::jsonResponse(['error' => "User with id: $id not found!"], 404, JSON_PRETTY_PRINT);
+
+        })->addMiddleware(new LogMiddleware());
+
+    }, [new AuthMiddleware()]);
+
 
 
 
@@ -209,6 +241,11 @@ Flight::group('/api/v1/', function () {
         });
 
     });
+
+
+    FLight::group('/*', function (){
+
+    }, [new AuthMiddleware()]);
 
 
 });

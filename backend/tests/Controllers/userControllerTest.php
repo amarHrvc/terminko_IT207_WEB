@@ -9,7 +9,7 @@ $faker = null;
 
 beforeAll(function () use (&$controller, &$faker) {
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ .'/../..');
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
     $dotenv->load();
     require __DIR__ . '/../../app/dao/daoRegister.php';
 

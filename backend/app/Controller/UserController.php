@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Models\User;
 use Firebase\JWT\JWT;
 use Flight;
 use OpenApi\Attributes as OA;
@@ -14,17 +15,6 @@ class UserController extends BaseController
         $userDao = Flight::UserDao();
         parent::__construct($userDao);
     }
-
-//    #[OA\Get(path: '/api/v1/users', operationId: 'get All users ')]
-//    #[OA\Response(response: '200', description: 'users')]
-
-//    #[OA\Get(
-//        path: '/api/users',
-//        responses: [
-//            new OA\Response(response: 200, description: 'AOK'),
-//            new OA\Response(response: 401, description: 'Not allowed'),
-//        ]
-//    )]
 
     #[OA\Get(
         path: '/api/v1/users',
@@ -180,6 +170,7 @@ class UserController extends BaseController
                 type: 'object'
             ),
         ),
+        //TODO: fix response
         tags: ['Users'],
         responses: [
             new OA\Response(
@@ -212,7 +203,7 @@ class UserController extends BaseController
 
         $userId = Flight::UserDao()->create($data);
         $user = Flight::UserDao()->findById($userId);
-        return ['user' => $user->toArray()];
+        return ['user' => $user->toSlimArray(), 'error' => false];
     }
 
     #[OA\Post(
@@ -283,15 +274,17 @@ class UserController extends BaseController
 
         unset($data['password']);
 
+
         $token_data = [
-            'user' => $user,
+            'user' => $user->toArray(),
             'exp' => time() + (60 * 60 * 24),
             'iat' => time()
         ];
 
         $token = JWT::encode($token_data, $_ENV['JWT_SECRET'], 'HS256');
+        $user->setToken($token);
 
-        return ['user' => array_merge($user->toArray(), ['token' => $token])];
+        return ['user' => $user->toSlimArray(), 'error' => false];
     }
 
 

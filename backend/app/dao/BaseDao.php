@@ -4,6 +4,7 @@ namespace App\Dao;
 
 use App\Database\Database;
 use App\Helpers\Helpers;
+use App\Models\User;
 use PDO;
 use Pest\Plugins\Parallel\Handlers\Pest;
 
@@ -18,7 +19,7 @@ abstract class BaseDao implements DaoInterface
         $this->db = Database::getInstance();
     }
 
-    public function findById(int $id): ?object
+    public function findById(int $id): ?User
     {
         $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = ?");
         $stmt->execute([$id]);

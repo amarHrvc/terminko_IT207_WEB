@@ -16,6 +16,8 @@ class User
     private $created_at;
     private $updated_at;
 
+    private $token;
+
     /**
      * @param $id
      * @param $tenant_id
@@ -190,6 +192,16 @@ class User
         $this->updated_at = $updated_at;
     }
 
+    public function getToken(): null
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
+    }
+
     public function toArray(): array
     {
         return [
@@ -200,8 +212,22 @@ class User
             'password' => $this->password,
             'phone' => $this->phone,
             'role' => $this->role->value,
+            'token' => $this->token,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
     }
+
+
+    public function toSlimArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'token' => $this->token,
+        ];
+    }
+
 }
