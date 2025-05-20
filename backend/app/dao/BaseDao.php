@@ -19,7 +19,7 @@ abstract class BaseDao implements DaoInterface
         $this->db = Database::getInstance();
     }
 
-    public function findById(int $id): ?User
+    public function findById(int $id): ?object
     {
         $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = ?");
         $stmt->execute([$id]);

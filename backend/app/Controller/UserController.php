@@ -71,7 +71,7 @@ class UserController extends BaseController
     public function show(string $id): array
     {
         $userById = Flight::UserDao()->findById($id);
-        return ($userById ? $userById->toArray() : []);
+        return ($userById ? $userById->toSlimArray() : []);
     }
 
     #[OA\Put(

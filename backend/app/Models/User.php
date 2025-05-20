@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Enums\UserRole;
+use Couchbase\Role;
 
 class User
 {
@@ -40,11 +41,6 @@ class User
         $this->role = UserRole::from($data['role']);
         $this->created_at = $data['created_at'];
         $this->updated_at = $data['updated_at'];
-    }
-
-    public static function fromArray(array $data): self
-    {
-        return new self($data);
     }
 
 
@@ -202,6 +198,10 @@ class User
         $this->token = $token;
     }
 
+    public static function fromArray(array $data): self
+    {
+        return new self($data);
+    }
     public function toArray(): array
     {
         return [
@@ -218,7 +218,6 @@ class User
         ];
     }
 
-
     public function toSlimArray(): array
     {
         return [
@@ -226,8 +225,18 @@ class User
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'role' => $this->role,
             'token' => $this->token,
         ];
+    }
+
+    public function isAdmin()
+    {
+        return UserRole::ADMIN === $this->role;
+    }
+    public function isOwner()
+    {
+        return UserRole::OWNER === $this->role;
     }
 
 }

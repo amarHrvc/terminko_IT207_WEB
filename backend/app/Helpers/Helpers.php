@@ -147,4 +147,18 @@ class Helpers
     {
         return new TenantDao()->create(self::getTenantData(Factory::create()));
     }
+
+    /**
+     * @param array $service
+     * @return void
+     */
+    public static function checkTenantId($tenant): void
+    {
+//    die ($tenant['id']);
+//    echo ($tenant['id'] != Flight::get('user')->getTenantId());
+//    die(Flight::get('user')->getId());
+        if ($tenant['id'] != Flight::get('user')->getTenantId()) {
+            Flight::jsonHalt(["error" => "User does not have access to this service (Tenant ID missmatch) !"], 404);
+        }
+    }
 }

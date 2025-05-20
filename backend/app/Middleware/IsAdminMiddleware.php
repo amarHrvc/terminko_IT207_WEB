@@ -8,27 +8,19 @@ use Firebase\JWT\Key;
 use Flight;
 use stdClass;
 
-class AuthMiddleware
+class IsAdminMiddleware
 {
     public function before($params)
     {
-        $auth = Flight::request()->header('Auth');
-        if (empty($auth)) {
-            Flight::jsonHalt(['error' => 'You must be logged in to access this page.'], 403);
+        $userModel = Flight::get('user');
+
+        if (!$userModel->isAdmin()) {
+            Flight::jsonHalt([
+                'error' => 'user do not have sufficient rights to perform this action !',
+                'user' => $userModel->toSlimArray()], 403);
         }
 
-        list($headers, $token) = $this->decodeToken($auth);
-
-        $this->isTokenExpired($token);
-
-//        var_dump(User::fromArray((array)$token->user));
-
-        $userModel = User::fromArray((array)$token->user);
-        Flight::set('user', $userModel);
-
-//        die(json_encode(Flight::get('user')));
-//        var_dump($readableTime);
-//        var_dump($headers);
+        return $userModel->isAdmin();
     }
 
     public function after($params)

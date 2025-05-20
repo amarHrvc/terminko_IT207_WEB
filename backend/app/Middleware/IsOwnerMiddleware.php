@@ -8,27 +8,23 @@ use Firebase\JWT\Key;
 use Flight;
 use stdClass;
 
-class AuthMiddleware
+class IsOwnerMiddleware
 {
     public function before($params)
     {
-        $auth = Flight::request()->header('Auth');
-        if (empty($auth)) {
-            Flight::jsonHalt(['error' => 'You must be logged in to access this page.'], 403);
+        $userModel = Flight::get('user');
+
+        if ($userModel->isAdmin()) {
+            return true;
         }
 
-        list($headers, $token) = $this->decodeToken($auth);
+        if (!$userModel->isOwner()) {
+            Flight::jsonHalt([
+                'error' => 'user do not have sufficient rights to perform this action (OwnerID)!',
+                'user' => $userModel->toSlimArray()], 403);
+        }
 
-        $this->isTokenExpired($token);
-
-//        var_dump(User::fromArray((array)$token->user));
-
-        $userModel = User::fromArray((array)$token->user);
-        Flight::set('user', $userModel);
-
-//        die(json_encode(Flight::get('user')));
-//        var_dump($readableTime);
-//        var_dump($headers);
+        return $userModel->isOwner() || $userModel->isAdmin();
     }
 
     public function after($params)

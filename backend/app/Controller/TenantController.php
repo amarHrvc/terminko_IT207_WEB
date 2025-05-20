@@ -15,15 +15,15 @@ class TenantController extends BaseController
     public function index()
     {
 
-        $bookings = $this->dao->findAll();
-        return (Flight::getArrayFromModels($bookings));
+        $tenants = $this->dao->findAll();
+        return (Flight::getArrayFromModels($tenants));
 
     }
 
     public function show(string $id): array
     {
-        $bookingById = $this->dao->findById($id);
-        return ($bookingById ? $bookingById->toArray() : []);
+        $byId = $this->dao->findById($id);
+        return ($byId ? $byId->toArray() : []);
 
     }
 
