@@ -1,11 +1,14 @@
 <?php
 namespace App\Routes;
 
+use App\Helpers\Helpers;
+use App\Middleware\AuthMiddleware;
+use App\Middleware\IsAdminMiddleware;
+use App\Middleware\IsOwnerMiddleware;
+use App\Middleware\LogMiddleware;
 use Flight;
 use Flight\Engine;
 use SebastianBergmann\LinesOfCode\IllogicalValuesException;
-
-
 
 
 /** @var Engine $app */
@@ -54,22 +57,49 @@ use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 
 Flight::group('/api/v1/', function () {
 
+    Flight::route('POST /register', function () {
+        $data = Flight::request()->data;
+        $user = FLight::UserController()->register($data->getData());
+
+        if ($user['error'] == true) {
+            Flight::jsonResponse($user, 400, JSON_PRETTY_PRINT);
+            return;
+        }
+        Flight::jsonResponse($user, 200, JSON_PRETTY_PRINT);
+
+    });
+
+    Flight::route('POST /login', function () {
+
+        $data = Flight::UserController()->login(Flight::request()->data->getData());
+
+        if ($data['error'] == true) {
+            Flight::jsonResponse($data, 400, JSON_PRETTY_PRINT);
+            return;
+        }
+        $user = $data['user'];
+
+        unset($user['password']);
+
+        Flight::jsonResponse($user, 200, JSON_PRETTY_PRINT);
+
+    });
+
 
     //Users
     Flight::group('/users', function () {
 
-        /**
-         * @OA\Get(
-         *     path="/api/v1/users",
-         *     @OA\Response(response="200", description="Get all users")
-         * )
-         */
-        Flight::route('/', function () {
+        Flight::route('GET /', function () {
             Flight::jsonResponse(Flight::UserController()->index(), 200, JSON_PRETTY_PRINT);
         });
 
         Flight::route('GET /@id', function ($id) {
-            Flight::jsonResponse(Flight::UserController()->show($id), 200, JSON_PRETTY_PRINT);
+
+            $user = Flight::UserController()->show($id);
+            if ($user)
+                Flight::jsonResponse($user, 200, JSON_PRETTY_PRINT);
+            else
+                Flight::jsonResponse($user, 404, JSON_PRETTY_PRINT);
         });
 
         Flight::route('POST /@id', function ($id) {
@@ -78,15 +108,19 @@ Flight::group('/api/v1/', function () {
                 throw new IllogicalValuesException("ID value missmatch");
 
             Flight::jsonResponse(Flight::UserController()->update($data->getData()), 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware([new LogMiddleware(), new IsAdminMiddleware()]);
 
         Flight::route('DELETE /@id', function ($id) {
-            Flight::jsonResponse(Flight::UserController()->delete($id), 200, JSON_PRETTY_PRINT);
-        });
+            $userDeleted = Flight::UserController()->delete($id);
 
-    });
+            if($userDeleted)
+                Flight::jsonResponse(['success' => "User with id: $id deleted!"], 200, JSON_PRETTY_PRINT);
+            else
+                Flight::jsonResponse(['error' => "User with id: $id not found!"], 404, JSON_PRETTY_PRINT);
 
+        })->addMiddleware([new LogMiddleware(), new IsAdminMiddleware()]);
 
+    }, [new AuthMiddleware()]);
 
 
     //Bookings
@@ -97,6 +131,7 @@ Flight::group('/api/v1/', function () {
         });
 
         Flight::route('GET /@id', function ($id) {
+            //TODO: get bookings per tentant  id or check if booking belongs to tenant
             Flight::jsonResponse(Flight::BookingController()->show($id), 200, JSON_PRETTY_PRINT);
         });
 
@@ -106,14 +141,14 @@ Flight::group('/api/v1/', function () {
                 throw new IllogicalValuesException("ID value missmatch");
 
             Flight::jsonResponse(Flight::BookingController()->update($data->getData()), 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsAdminMiddleware());
 
         Flight::route('DELETE /@id', function ($id) {
             $delete = Flight::BookingController()->delete($id);
             Flight::jsonResponse($delete, 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsAdminMiddleware());
 
-    });
+    }, [new AuthMiddleware()]);
 
 
     //Ratings
@@ -133,17 +168,20 @@ Flight::group('/api/v1/', function () {
                 throw new IllogicalValuesException("ID value missmatch");
 
             Flight::jsonResponse(Flight::RatingController()->update($data->getData()), 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsAdminMiddleware());
 
         Flight::route('DELETE /@id', function ($id) {
             $delete = Flight::RatingController()->delete($id);
             Flight::jsonResponse($delete, 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsAdminMiddleware());
 
     });
 
 
     //Services
+    //TODO: workout additional teanant logic
+    //TODO: user lookup businness/tenant and then it needs to get services ?
+
     Flight::group('/services', function () {
 
         Flight::route('/', function () {
@@ -151,8 +189,11 @@ Flight::group('/api/v1/', function () {
         });
 
         Flight::route('GET /@id', function ($id) {
-            Flight::jsonResponse(Flight::ServiceController()->show($id), 200, JSON_PRETTY_PRINT);
-        });
+            $service = Flight::ServiceController()->show($id);
+
+            //TODO: get bookings per tentant  id or check if booking belongs to tenant
+            Flight::jsonResponse($service, 200, JSON_PRETTY_PRINT);
+        })->addMiddleware(new IsOwnerMiddleware());
 
         Flight::route('POST /@id', function ($id) {
             $data = Flight::request()->data;
@@ -160,12 +201,12 @@ Flight::group('/api/v1/', function () {
                 throw new IllogicalValuesException("ID value missmatch");
 
             Flight::jsonResponse(Flight::ServiceController()->update($data->getData()), 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsOwnerMiddleware());
 
         Flight::route('DELETE /@id', function ($id) {
             $delete = Flight::ServiceController()->delete($id);
             Flight::jsonResponse($delete, 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsOwnerMiddleware());
 
     });
 
@@ -173,28 +214,48 @@ Flight::group('/api/v1/', function () {
     //Tenants
     Flight::group('/tenants', function () {
 
-        Flight::route('/', function () {
+        Flight::route('GET /', function () {
             Flight::jsonResponse(Flight::TenantController()->index(), 200, JSON_PRETTY_PRINT);
         });
 
         Flight::route('GET /@id', function ($id) {
-            Flight::jsonResponse(Flight::TenantController()->show($id), 200, JSON_PRETTY_PRINT);
+
+            $tenant = Flight::TenantController()->show($id);
+            Helpers::checkTenantId($tenant);
+
+            Flight::jsonResponse($tenant, 200, JSON_PRETTY_PRINT);
         });
 
-        Flight::route('POST /@id', function ($id) {
+        //TODO: tenant creation should be moved to register process
+        Flight::route('POST /', function () {
+            $tenantId = Flight::TenantController()->create(Flight::request()->data->getData());
+
+            if (!$tenantId){
+                Flight::json(['error' => "Error while creating tenantId !!!"], 400);
+            }
+
+            Flight::jsonResponse(['success' => "Tenant created with id: $tenantId"], 200, JSON_PRETTY_PRINT);
+        })->addMiddleware(new IsOwnerMiddleware());
+
+        Flight::route('PUT /@id', function ($id) {
             $data = Flight::request()->data;
             if ($data->id != $id)
                 throw new IllogicalValuesException("ID value missmatch");
 
             Flight::jsonResponse(Flight::TenantController()->update($data->getData()), 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsOwnerMiddleware());
 
         Flight::route('DELETE /@id', function ($id) {
             $delete = Flight::TenantController()->delete($id);
             Flight::jsonResponse($delete, 200, JSON_PRETTY_PRINT);
-        });
+        })->addMiddleware(new IsAdminMiddleware());
 
-    });
+    }, [new AuthMiddleware()]);
+
+
+    FLight::group('/*', function (){
+
+    }, [new AuthMiddleware()]);
 
 
 });

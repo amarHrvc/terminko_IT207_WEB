@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Enums\UserRole;
+use Couchbase\Role;
+
 class User
 {
     private $id;
@@ -10,9 +13,11 @@ class User
     private $email;
     private $password;
     private $phone;
-    private $role;
+    private UserRole $role;
     private $created_at;
     private $updated_at;
+
+    private $token;
 
     /**
      * @param $id
@@ -33,14 +38,9 @@ class User
         $this->email = $data['email'];
         $this->password = $data['password'];
         $this->phone = $data['phone'];
-        $this->role = $data['role'];
+        $this->role = UserRole::from($data['role']);
         $this->created_at = $data['created_at'];
         $this->updated_at = $data['updated_at'];
-    }
-
-    public static function fromArray(array $data): self
-    {
-        return new self($data);
     }
 
 
@@ -143,7 +143,7 @@ class User
     /**
      * @return mixed
      */
-    public function getRole()
+    public function getRole(): UserRole
     {
         return $this->role;
     }
@@ -151,7 +151,7 @@ class User
     /**
      * @param mixed $role
      */
-    public function setRole($role): void
+    public function setRole(UserRole $role): void
     {
         $this->role = $role;
     }
@@ -188,7 +188,21 @@ class User
         $this->updated_at = $updated_at;
     }
 
-    public function toArray()
+    public function getToken(): null
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
+    }
+
+    public static function fromArray(array $data): self
+    {
+        return new self($data);
+    }
+    public function toArray(): array
     {
         return [
             'id' => $this->id,
@@ -197,11 +211,32 @@ class User
             'email' => $this->email,
             'password' => $this->password,
             'phone' => $this->phone,
-            'role' => $this->role,
+            'role' => $this->role->value,
+            'token' => $this->token,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
+    }
 
+    public function toSlimArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'role' => $this->role,
+            'token' => $this->token,
+        ];
+    }
+
+    public function isAdmin()
+    {
+        return UserRole::ADMIN === $this->role;
+    }
+    public function isOwner()
+    {
+        return UserRole::OWNER === $this->role;
     }
 
 }

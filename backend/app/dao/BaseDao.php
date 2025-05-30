@@ -4,6 +4,7 @@ namespace App\Dao;
 
 use App\Database\Database;
 use App\Helpers\Helpers;
+use App\Models\User;
 use PDO;
 use Pest\Plugins\Parallel\Handlers\Pest;
 

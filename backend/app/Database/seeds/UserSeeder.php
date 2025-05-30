@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use App\Dao\UserDao;
+use App\Helpers\Helpers;
+use Faker\Factory;
 use Phinx\Seed\AbstractSeed;
 
-class TenantSeeder extends AbstractSeed
+class UserSeeder extends AbstractSeed
 {
     /**
      * Run Method.
@@ -16,6 +19,11 @@ class TenantSeeder extends AbstractSeed
      */
     public function run(): void
     {
+        $userData = Helpers::getUserData(Factory::create(), true);
+        var_dump($userData);
+        $id = new UserDao()->create($userData);
+        var_dump($id);
 
+        $this->table('users')->insert($userData)->save();
     }
 }

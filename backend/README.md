@@ -13,4 +13,7 @@
 
 TODO:
 
-- [ ] add swagger attributes to rest endpoints (cuurently only part of users endpoints are documented)
+- [ ] add swagger attributes to rest endpoints (cuurently only part of users endpoints are documented) *ongoing effort
+- [ ] add ORM library for ease of use TODO
+- [ ] add ORM library for ease of use TODO
+- [ ] enhance tenant checks while fetching data from DB TODO

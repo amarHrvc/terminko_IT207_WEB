@@ -42,7 +42,7 @@ final class InitialMigration extends AbstractMigration
             ->addIndex(['email'], ['unique' => true])
             ->addColumn('password', 'string', ['limit' => 255, 'null' => false])
             ->addColumn('phone', 'string', ['limit' => 50, 'null' => true, 'default' => null])
-            ->addColumn('role', 'enum', ['values' => ['owner', 'staff', 'customer'], 'default' => 'customer', 'null' => false, 'comment' => 'User role in the system'])
+            ->addColumn('role', 'enum', ['values' => ['owner', 'admin', 'customer'], 'default' => 'customer', 'null' => false, 'comment' => 'User role in the system'])
             ->addTimestamps()
             ->addForeignKey('tenant_id', 'tenants', 'id', ['delete' => 'SET_NULL', 'update' => 'NO_ACTION'])
             ->addIndex(['tenant_id'], ['name' => 'idx_users_tenant_id'])

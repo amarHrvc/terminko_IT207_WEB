@@ -64,6 +64,14 @@ it('can update a user', function () use (&$dao, &$faker, &$userData) {
         ->and($user->getEmail())->toBe($userData['email']);
 });
 
+it('can find a user', function () use (&$dao, &$faker, &$userData) {
+    $id = $dao->create($userData);
+
+    $user = $dao->findById($id);
+    expect($user->getName())->toBe($userData['name'])
+        ->and($user->getEmail())->toBe($userData['email']);
+});
+
 it('can delete a user', function () use (&$dao, &$faker, &$userData) {
     $id = $dao->create($userData);
 
