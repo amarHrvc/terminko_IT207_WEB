@@ -191,7 +191,7 @@ class UserController extends BaseController
     public function register($data): array
     {
 
-        if (!isset($data['password']) || !$data['email']) {
+        if (!isset($data['password']) || !$data['email'] || !$data['name']) {
             return ['error' => 'Missing required fields'];
         }
 

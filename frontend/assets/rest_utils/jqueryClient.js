@@ -55,9 +55,13 @@ let RestClient = {
             }
         };
 
+
+
         // Handle data based on type
         if (data) {
             if (typeof data === 'object') {
+                console.log("🚀 ~ data:", data)
+
                 ajaxOptions.data = JSON.stringify(data);
                 ajaxOptions.contentType = "application/json";
             } else {

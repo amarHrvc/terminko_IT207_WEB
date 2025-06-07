@@ -31,6 +31,16 @@ let UserService = {
         RestClient.requestWpromise("login", "POST", {email: email, password: password})
             .done(response => {
                 console.log("🚀 ~ response:", response)
+                let role = response.role;
+                if (role === "admin") {
+                    // window.location.replace("admin.html");
+                    swal("🚀 Role: ", role, 'success');
+                } else if (role === "user") {
+                    // window.location.replace("index.html");
+                } else {
+                    swal("🚀 Response: " + response.error, "", 'error');
+                    return;
+                }
                 localStorage.setItem("user_token", response.token);
                 // window.location.replace("#dashboard");
             })
@@ -39,6 +49,33 @@ let UserService = {
                 swal("🚀 Response: " + xhr.responseJSON?.error, "", 'error');
         
             });
+    },
+
+    register: function (email, password, name) {
+
+        swal({
+            title: "Register111",
+            text: `Email: ${email}\nPassword: ${password}, name: ${name}`,
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+        })
+
+        // return;
+
+        RestClient.requestWpromise("register", "POST", {name: name, email: email, password: password})
+            .done(response => {
+                console.log("🚀 ~ response:", response);
+                swal(`🚀 Response: ${response.user.name} created !`, "", 'success');
+                window.location.replace("#dashboard");
+
+            })
+            .fail(xhr => {
+                console.log("🚀 ~ xhr:", xhr);
+                swal(`🚀 Response:  ${xhr.responseJSON?.error}`, "", 'error');
+            });
+        
+
     },
 
     logout: function () {
