@@ -5,8 +5,12 @@ let UserService = {
             // window.location.replace("index.html");
         }
 
+        // swal("Hello world!");
+
+
         let form = $("#formAuthentication");
-        console.log('FOOOORMMMMMMMMMMMMMMMMM', form);
+        console.log("🚀 ~ form USerService.init:", form)
+        
 
         $("#formAuthentication").on('submit', function (e) {
             e.preventDefault();
@@ -14,7 +18,7 @@ let UserService = {
             console.log('++++FormEntity++++', formEntity);
 
             if (!formEntity.email || !formEntity.password) {
-                alert("Fill in all fealds !");
+                swal("Fill in all fields !", "", 'error');
                 return;
             }
 
