@@ -9,49 +9,36 @@ let UserService = {
 
 
         let form = $("#formAuthentication");
-        console.log("🚀 ~ form USerService.init:", form)
+        const email = $('#email').val();
+        const password = $('#password').val();
+        
+        // swal("🚀 ~ email:" + email)
         
 
-        $("#formAuthentication").on('submit', function (e) {
-            e.preventDefault();
-            let formEntity = Object.fromEntries(new FormData(this));
-            console.log('++++FormEntity++++', formEntity);
 
-            if (!formEntity.email || !formEntity.password) {
+
+            if (!email || !password) {
                 swal("Fill in all fields !", "", 'error');
                 return;
             }
 
-            UserService.login(formEntity);
-        });
+            UserService.login(email, password);
+
     },
 
-    login: function (entity) {
-        // $.ajax({
-        //     url: API_BASE_URL + "login",
-        //     type: "POST",
-        //     data: JSON.stringify(entity),
-        //     contentType: "application/json",
-        //     dataType: "json",
-        //     success: function (result) {
-        //         console.log("RESUUUULTTT ::::", result);
-        //         localStorage.setItem("user_token", result.token);
-        //         window.location.replace("#dashboard");
-        //     },
-        //     error: function (xhr, textStatus, errorThrown) {
-        //         // toastr.error(xhr?.responseText ? xhr.responseText : 'Error');
-        //         console.error('xhr.responseJSON:', xhr.responseJSON);
-        //         console.error('textStatus:', textStatus);
-        //         console.error('errorThrown:', errorThrown);
-        //     },
-        // });
-        //
-        RestClient.requestWprom("login", "POST", entity)
+    login: function (email, password) {
+        
+        RestClient.requestWpromise("login", "POST", {email: email, password: password})
             .done(response => {
-                console.log("++++ requestWprom +++++++", response);
-                window.location.replace("#dashboard");
+                console.log("🚀 ~ response:", response)
+                localStorage.setItem("user_token", response.token);
+                // window.location.replace("#dashboard");
             })
-            .fail(xhr => console.log(xhr.responseJSON?.error));
+            .fail(xhr => {
+                console.log("🚀 ~ xhr:", xhr);
+                swal("🚀 Response: " + xhr.responseJSON?.error, "", 'error');
+        
+            });
     },
 
     logout: function () {
