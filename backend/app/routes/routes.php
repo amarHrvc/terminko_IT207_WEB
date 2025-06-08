@@ -222,8 +222,22 @@ Flight::group('/api/v1/', function () {
 
             $tenant = Flight::TenantController()->show($id);
             Helpers::checkTenantId($tenant);
+            if ($tenant) {
+                $response = Helpers::getResponseObject([
+                    'success' => true,
+                    'message' => $tenant
+                ], 200);
+                Helpers::jsonResponseFromObject($response, $response['code'] ?? 200);
+            } else {
+                Helpers::JsonResponse(
+                    false,
+                    "error when getting tenant with id: $id",
+                    null, 
+                    200);
+            }
 
-            Flight::jsonResponse($tenant, 200, JSON_PRETTY_PRINT);
+
+            
         });
 
         //TODO: tenant creation should be moved to register process

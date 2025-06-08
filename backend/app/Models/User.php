@@ -223,6 +223,7 @@ class User
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'tenant_id' => $this->tenant_id,
             'email' => $this->email,
             'phone' => $this->phone,
             'role' => $this->role,
