@@ -23,4 +23,9 @@ class TenantDao extends BaseDao
 
         return $tenant ? Tenant::fromArray($tenant) : null;
     }
+
+    public function create(array $data): int
+    {
+        return parent::create($data);
+    }
 }

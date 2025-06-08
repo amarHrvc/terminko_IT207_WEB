@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Phinx\Seed\AbstractSeed;
+use App\Helpers\Helpers;
+use Faker\Factory;
 
 class TenantSeeder extends AbstractSeed
 {
@@ -16,6 +18,11 @@ class TenantSeeder extends AbstractSeed
      */
     public function run(): void
     {
+
+        $tenantData = Helpers::getTenantData(Factory::create(), true);
+        // $tenantId = new TenantDao()->create($tenantData);
+        var_dump($tenantData);
+        $this->table('tenants')->insert($tenantData)->save();
 
     }
 }
