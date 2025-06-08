@@ -33,10 +33,10 @@ let UserService = {
                 console.log("🚀 ~ response:", response)
                 let role = response.role;
                 if (role === "admin") {
-                    // window.location.replace("admin.html");
+                    window.location.replace("#dashboard");
                     swal("🚀 Role: ", role, 'success');
                 } else if (role === "user") {
-                    // window.location.replace("index.html");
+                    window.location.replace("#dashboard");
                 } else {
                     swal("🚀 Response: " + response.error, "", 'error');
                     return;
