@@ -59,14 +59,14 @@ class Helpers
     public static function getTenantData(\Faker\Generator $faker): array
     {
         return [
-            'name' => $faker->company(),
+            'name' => "Posao: " . $faker->randomNumber(2,false),
             'slug' => $faker->unique()->slug(),
             'phone' => $faker->phoneNumber(),
             'email' => $faker->unique()->companyEmail(),
             'address' => $faker->streetAddress(),
-            'city' => $faker->city(),
-            'country' => $faker->country(),
-            'postal_code' => $faker->postcode(),
+            'city' => "Sarajevo",
+            'country' => "BA",
+            'postal_code' => "71000",
             'operating_hours_json' => json_encode(['open' => '08:00', 'close' => '18:00']),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -160,5 +160,50 @@ class Helpers
         if ($tenant['id'] != Flight::get('user')->getTenantId()) {
             Flight::jsonHalt(["error" => "User does not have access to this service (Tenant ID missmatch) !"], 404);
         }
+    }
+
+    public static function jsonResponse(bool $success, string $message, $data = null, int $statusCode = 200): void
+    {
+        $response = self::getResponseObject([
+            'success' => $success,
+            'message' => $message,
+            'error' => !$success ? true : false,
+        ], $statusCode);
+  
+
+        if ($data !== null) {
+            $response['data'] = $data;
+        }
+
+        Flight::json($response, $statusCode, JSON_PRETTY_PRINT);
+    }
+    
+
+    public static function getResponseObject(array $data, int $statusCode): array
+    {
+        return  $response = [
+            'success' => $data['success'] ?? false,
+            'error' => !$data['success'] ?? false,
+            'message' => $data['message'] ?? '',
+            'code' => $statusCode
+
+        ];
+    }
+
+    public static function jsonResponseFromObject($data, int $statusCode = 200): void
+    {
+        $response = [
+            'success' => "",
+            'error' => "",
+            'message' => "",
+            'code' => $statusCode
+        ];
+
+        if ($data !== null) {
+            $response = $data;
+            $response['code'] = $statusCode;
+        }
+
+        Flight::json($response, $statusCode, JSON_PRETTY_PRINT);
     }
 }

@@ -3,6 +3,9 @@ Booking and appointment scheduling platform designed for service-based businesse
 
 **Overview**
 
+FE: https://terminko-fe-cm764.ondigitalocean.app/#index
+BE: https://terminko-be-7k49z.ondigitalocean.app/ - not working it cant find files  ?
+
 This application provides a comprehensive solution for businesses to manage their services, staff schedules, and customer bookings. The system supports multiple businesses (tenants) on a single platform while maintaining data isolation between them.
 
 

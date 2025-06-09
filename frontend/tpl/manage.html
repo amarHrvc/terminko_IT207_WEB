@@ -1,21 +1,6 @@
 
 
 
-<!--    <link rel="stylesheet" href="assets/vendor/css/core.css" />-->
-<!--    <link rel="stylesheet" href="assets/css/demo.css" />-->
-
-    <!-- Vendors CSS -->
-
-<!--    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />-->
-
-<!--    &lt;!&ndash; endbuild &ndash;&gt;-->
-
-<!--    <link rel="stylesheet" href="assets/vendor/datatables-bs5/datatables.bootstrap5.css" />-->
-<!--    <link rel="stylesheet" href="assets/vendor/datatables-responsive-bs5/responsive.bootstrap5.css" />-->
-<!--    <link rel="stylesheet" href="assets/vendor/datatables-buttons-bs5/buttons.bootstrap5.css" />-->
-<!--    <link rel="stylesheet" href="assets/vendor/select2/select2.css" />-->
-    <!-- Page CSS -->
-
 
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
@@ -238,87 +223,101 @@
                                         <small class="text-body-secondary float-end">---</small>
                                     </div>
                                     <div class="card-body">
-                                        <form action="/upload" method="POST"  enctype="multipart/form-data" id="my-form">
+                                        <form method="POST" enctype="multipart/form-data" id="registerTenantForm" action="" method="POST"
+                                            onsubmit="updateTenant(event)">
                                             <div class="mb-6">
                                                 <label class="form-label" for="basic-icon-default-fullname">Naziv</label>
                                                 <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"
-                            ><i class="icon-base ti tabler-building"></i
-                            ></span>
-                                                    <input
-                                                            type="text"
-                                                            class="form-control"
-                                                            id="basic-icon-default-fullname"
-                                                            placeholder="Naziv..."
-                                                            aria-label="Naziv..."
-                                                            aria-describedby="basic-icon-default-fullname2" />
+                                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                            class="icon-base ti tabler-building"></i></span>
+                                                    <input type="text" class="form-control" 
+                                                        id="tenantName" 
+                                                        name="tenantName" 
+                                                        placeholder="Naziv..." />
                                                 </div>
                                             </div>
+
+                                            
+    
                                             <div class="mb-6">
-                                                <label class="form-label" for="basic-icon-default-company">Company</label>
+                                                <label class="form-label" for="basic-icon-default-fullname">Grad</label>
                                                 <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"
-                            ><i class="icon-base ti tabler-address-book"></i
-                            ></span>
-                                                    <input
-                                                            type="text"
-                                                            id="basic-icon-default-company"
-                                                            class="form-control"
-                                                            placeholder="ACME Inc."
-                                                            aria-label="ACME Inc."
-                                                            aria-describedby="basic-icon-default-company2" />
+                                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                            class="icon-base ti tabler-building"></i></span>
+                                                    <input type="text" class="form-control" 
+                                                        id="tenantCity" 
+                                                        name="tenantCity" 
+                                                        value="Sarajevo"
+                                                        placeholder="Naziv..." />
+                                                </div>
+                                            </div>     
+    
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-fullname">Adresa</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                            class="icon-base ti tabler-building"></i></span>
+                                                    <input type="text" class="form-control" 
+                                                        id="tenantAddress" 
+                                                        name="tenantAddress"
+                                                        value="Ulica 1"
+                                                        placeholder="Naziv..." />
+                                                </div>
+                                            </div>   
+    
+                                            <div class="mb-6">
+                                                <label class="form-label" for="basic-icon-default-fullname">Zip code</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                            class="icon-base ti tabler-building"></i></span>
+                                                    <input type="text" class="form-control" 
+                                                        id="tenantPostalCode" 
+                                                        name="tenantPostalCode"
+                                                        value="71000"
+                                                        placeholder="Naziv..." />
                                                 </div>
                                             </div>
+                                            
+
+
                                             <div class="mb-6">
                                                 <label class="form-label" for="basic-icon-default-email">Email</label>
                                                 <div class="input-group input-group-merge">
-                                                    <span class="input-group-text"><i class="icon-base ti tabler-mail"></i></span>
-                                                    <input
-                                                            type="text"
-                                                            id="basic-icon-default-email"
-                                                            class="form-control"
-                                                            placeholder="john.doe"
-                                                            aria-label="john.doe"
-                                                            aria-describedby="basic-icon-default-email2" />
-                                                    <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
+                                                    <span class="input-group-text"><i
+                                                            class="icon-base ti tabler-mail"></i></span>
+                                                    <input type="text" id="tenantEmail" name="tenantEmail"
+                                                        class="form-control" placeholder="john.doe"
+                                                        aria-label="john.doe"
+                                                        aria-describedby="basic-icon-default-email2" value="email@test.com" />
+                                                    <span id="basic-icon-default-email2"
+                                                        class="input-group-text">@example.com</span>
                                                 </div>
                                                 <div class="form-text">You can use letters, numbers & periods</div>
                                             </div>
+
+
                                             <div class="mb-6">
-                                                <label class="form-label" for="basic-icon-default-phone">Phone No</label>
+                                                <label class="form-label" for="basic-icon-default-phone">Phone
+                                                    No</label>
                                                 <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-phone2" class="input-group-text"
-                            ><i class="icon-base ti tabler-phone"></i
-                            ></span>
-                                                    <input
-                                                            type="text"
-                                                            id="basic-icon-default-phone"
-                                                            class="form-control phone-mask"
-                                                            placeholder="658 799 8941"
-                                                            aria-label="658 799 8941"
-                                                            aria-describedby="basic-icon-default-phone2" />
+                                                    <span id="tenantPhonelabel" class="input-group-text"><i
+                                                            class="icon-base ti tabler-phone"></i></span>
+                                                    <input type="text" id="tenantPhone" name="tenantPhone"
+                                                        class="form-control phone-mask" placeholder="658 799 8941"
+                                                        value="658 799 8941"
+                                                        />
                                                 </div>
                                             </div>
-                                            <div class="mb-6">
-                                                <label class="form-label" for="basic-icon-default-message">Message</label>
-                                                <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-message2" class="input-group-text"
-                            ><i class="icon-base ti tabler-message-dots"></i
-                            ></span>
-                                                    <textarea
-                                                            id="basic-icon-default-message"
-                                                            class="form-control"
-                                                            placeholder="Hi, Do you have a moment to talk Joe?"
-                                                            aria-label="Hi, Do you have a moment to talk Joe?"
-                                                            aria-describedby="basic-icon-default-message2"></textarea>
-                                                </div>
-                                            </div>
+
+<!--                                             
                                             <div class="mb-6">
                                                 <label class="form-label" for="basic-icon-default-message">Logo</label>
                                                 <br>
-                                                <input type="file" name="logo" id="logo" required>
+                                                <input type="file" name="logo" id="logo">
 
-                                            </div>
+                                            </div> -->
+
+
                                             <button type="submit" class="btn btn-primary">Send</button>
                                         </form>
                                     </div>
@@ -545,39 +544,7 @@
                         </div>
 
                     </div>
-                    <!--/ Basic Card-->
-
-                    <!-- Product List Table - Datatable -->
-                    <!--            <div class="card m-3">-->
-                    <!--              <div class="card-header border-bottom">-->
-                    <!--                <h5 class="card-title">Filter</h5>-->
-                    <!--                <div class="d-flex justify-content-between align-items-center row pt-4 gap-6 gap-md-0 g-md-6">-->
-                    <!--                  <div class="col-md-4 product_status"></div>-->
-                    <!--                  <div class="col-md-4 product_category"></div>-->
-                    <!--                  <div class="col-md-4 product_stock"></div>-->
-                    <!--                </div>-->
-                    <!--              </div>-->
-                    <!--              <div class="card-datatable">-->
-                    <!--                <table class="datatables-products table">-->
-                    <!--                  <thead class="border-top">-->
-                    <!--                  <tr>-->
-                    <!--                    <th></th>-->
-                    <!--                    <th></th>-->
-                    <!--                    <th>product</th>-->
-                    <!--                    <th>category</th>-->
-                    <!--                    <th>stock</th>-->
-                    <!--                    <th>sku</th>-->
-                    <!--                    <th>price</th>-->
-                    <!--                    <th>qty</th>-->
-                    <!--                    <th>status</th>-->
-                    <!--                    <th>actions</th>-->
-                    <!--                  </tr>-->
-                    <!--                  </thead>-->
-                    <!--                </table>-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-                    <!--          </div>-->
-                    <!--/ Content -->
+                
                 </div>
                 <!--/ Content -->
 
@@ -631,3 +598,6 @@
 
 <!-- Main JS -->
 
+<script>
+    TenantService.getTenant(event);
+</script>

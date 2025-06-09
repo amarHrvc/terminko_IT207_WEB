@@ -5,49 +5,77 @@ let UserService = {
             // window.location.replace("index.html");
         }
 
+        // swal("Hello world!");
+
+
         let form = $("#formAuthentication");
-        console.log('FOOOORMMMMMMMMMMMMMMMMM', form);
+        const email = $('#email').val();
+        const password = $('#password').val();
+        
+        // swal("🚀 ~ email:" + email)
+        
 
-        $("#formAuthentication").on('submit', function (e) {
-            e.preventDefault();
-            let formEntity = Object.fromEntries(new FormData(this));
-            console.log('++++FormEntity++++', formEntity);
 
-            if (!formEntity.email || !formEntity.password) {
-                alert("Fill in all fealds !");
+
+            if (!email || !password) {
+                swal("Fill in all fields !", "", 'error');
                 return;
             }
 
-            UserService.login(formEntity);
-        });
+            UserService.login(email, password);
+
     },
 
-    login: function (entity) {
-        // $.ajax({
-        //     url: API_BASE_URL + "login",
-        //     type: "POST",
-        //     data: JSON.stringify(entity),
-        //     contentType: "application/json",
-        //     dataType: "json",
-        //     success: function (result) {
-        //         console.log("RESUUUULTTT ::::", result);
-        //         localStorage.setItem("user_token", result.token);
-        //         window.location.replace("#dashboard");
-        //     },
-        //     error: function (xhr, textStatus, errorThrown) {
-        //         // toastr.error(xhr?.responseText ? xhr.responseText : 'Error');
-        //         console.error('xhr.responseJSON:', xhr.responseJSON);
-        //         console.error('textStatus:', textStatus);
-        //         console.error('errorThrown:', errorThrown);
-        //     },
-        // });
-        //
-        RestClient.requestWprom("login", "POST", entity)
+    login: function (email, password) {
+        
+        RestClient.requestWpromise("login", "POST", {email: email, password: password})
             .done(response => {
-                console.log("++++ requestWprom +++++++", response);
-                window.location.replace("#dashboard");
+                console.log("🚀 ~ response:", response)
+                let role = response.role;
+                if (role === "admin") {
+                    window.location.replace("#dashboard");
+                    swal("🚀 Role: ", role, 'success');
+                } else if (role === "user") {
+                    window.location.replace("#dashboard");
+                } else {
+                    swal("🚀 Response: " + response.error, "", 'error');
+                    return;
+                }
+                localStorage.setItem("user_token", response.token);
+                // window.location.replace("#dashboard");
             })
-            .fail(xhr => console.log(xhr.responseJSON?.error));
+            .fail(xhr => {
+                console.log("🚀 ~ xhr:", xhr);
+                swal("🚀 Response: " + xhr.responseJSON?.error, "", 'error');
+        
+            });
+    },
+
+    register: function (email, password, name) {
+
+        swal({
+            title: "Register111",
+            text: `Email: ${email}\nPassword: ${password}, name: ${name}`,
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+        })
+
+        // return;
+
+        RestClient.requestWpromise("register", "POST", {name: name, email: email, password: password})
+            .done(response => {
+                console.log("🚀 ~ response:", response);
+                swal(`🚀 Response: ${response.user.name} created !`, "", 'success');
+                window.location.replace("#dashboard");
+
+            })
+            .fail(xhr => {
+                console.log("🚀 ~ xhr:", xhr);
+                swal(`🚀 Response:  ${xhr.responseJSON?.error}`, "", 'error');
+            });
+        
+
     },
 
     logout: function () {

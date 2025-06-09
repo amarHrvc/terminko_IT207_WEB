@@ -15,10 +15,21 @@ class CORS
         fwrite(fopen('php://stderr', 'w'), " ---- $origin \n");
 
         // Allow any localhost port
-        if (preg_match('/^https?:\/\/localhost(:\d+)?$/', $origin)) {
+        $allowedOrigins = [
+            'http://localhost',
+            'http://localhost:4200',
+            'http://localhost:8080',
+            'http://localhost:8100',
+            'http://terminko.app',
+        ];
+
+        foreach ($allowedOrigins as $allowedOrigin) {
+            if (preg_match('/^' . preg_quote($allowedOrigin, '/') . '(:\d+)?$/', $origin)) {
             fwrite(fopen('php://stderr', 'w'), "MATCH ------ $origin \n");
 
             header("Access-Control-Allow-Origin: $origin");
+            break;
+            }
         }
 
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
@@ -32,4 +43,7 @@ class CORS
             exit(0);
         }
     }
+
+
+    
 }

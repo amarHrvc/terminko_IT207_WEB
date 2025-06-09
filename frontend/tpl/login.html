@@ -30,7 +30,7 @@
                     <h4 class="mb-1">Dobrodošli 👋</h4>
                     <p class="mb-6">Molimo logujte se !</p>
 
-                    <form id="formAuthentication" class="mb-4" action="" method="GET">
+                    <form id="formAuthentication" class="mb-4" action="" method="GET" onsubmit="loginUser(event)">
                         <div class="mb-6 form-control-validation">
                             <label for="email" class="form-label">Email or Username</label>
                             <input
@@ -38,6 +38,7 @@
                                     class="form-control"
                                     id="email"
                                     name="email"
+                                    value="admin@test.com"
                                     placeholder="Enter your email or username"
                                     required
                                     autofocus />
@@ -50,6 +51,7 @@
                                         id="password"
                                         class="form-control"
                                         name="password"
+                                        value="admin123"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
@@ -117,22 +119,10 @@
 <script src="assets/vendor/js/bootstrap.js"></script>
 <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
 
-<script src="assets/vendor/libs/@algolia/autocomplete-js.js"></script>
-
-<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-<script src="assets/vendor/libs/hammer/hammer.js"></script>
-
-<!--    <script src="assets/vendor/libs/i18n/i18n.js"></script>-->
-
-<script src="assets/vendor/js/menu.js"></script>
 
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="assets/vendor/libs/@form-validation/popular.js"></script>
-<script src="assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-<script src="assets/vendor/libs/@form-validation/auto-focus.js"></script>
 
 
 
@@ -142,12 +132,33 @@
     </script>
 
 <!--<script type="module" src="assets/rest_utils/axiosClient.js"></script>-->
-    <script src="assets/rest_utils/constants.js"></script>
-    <script src="assets/rest_utils/jqueryClient.js"></script>
-    <script src="assets/rest_utils/user-service.js"></script>
+
     <script type="text/javascript">
-        UserService.init();
+        
     </script>
 
 
+<script>
+    loginUser = (event) => {
+        event.preventDefault();
+        const email = $('#email').val();
+        const password = $('#password').val();
+        
+        UserService.init();
 
+        // swal(email, ' ' + password, 'info');
+
+        // UserService.login(email, password)
+        //     .then((response) => {
+        //         if (response.status === 200) {
+        //             window.location.href = 'index.html';
+        //         } else {
+        //             swal('Login failed: ', response.data.message, 'error');
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error during login:', error);
+        //         swal('Login failed: ', response.data.message, 'error');
+        //     });
+    };
+  </script>

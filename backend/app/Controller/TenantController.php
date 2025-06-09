@@ -32,4 +32,34 @@ class TenantController extends BaseController
         return $this->dao->update($data['id'], $data);
     }
 
+    
+    public function create($data)
+    {
+
+        if (empty($data['name']) || empty($data['email'])) {
+            return \App\Helpers\Helpers::getResponseObject(['success' => false, 'message' => "Name and email are required"],  400);
+        }
+
+        // Check if tenant with the same email already exists
+        $existingTenant = $this->dao->findByEmail($data['email']);
+        if ($existingTenant) {
+            return \App\Helpers\Helpers::getResponseObject(['success' => false, 'error'=>true, 'message'=>"Tenant with this email already exists"], 400);
+            
+        }
+
+
+        $tenantId = parent::create($data);
+        if (!$tenantId) {
+            return \App\Helpers\Helpers::getResponseObject(['success' => false, 'message' => "Error while creating tenant"], 500);
+        }
+
+        $user = Flight::get('user');
+        $user->setTenantId($tenantId);
+        $userArr = $user->toArray();
+        unset($userArr['token']); // Remove token from user data
+        Flight::UserController()->update($userArr);
+
+        return \App\Helpers\Helpers::getResponseObject(['success' => true, 'message' => "Tenant created successfully"], 201) ;
+    }
+
 }

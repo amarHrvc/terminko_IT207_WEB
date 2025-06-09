@@ -222,32 +222,47 @@ Flight::group('/api/v1/', function () {
 
             $tenant = Flight::TenantController()->show($id);
             Helpers::checkTenantId($tenant);
+            if ($tenant) {
+                $response = Helpers::getResponseObject([
+                    'success' => true,
+                    'message' => $tenant
+                ], 200);
+                Helpers::jsonResponseFromObject($response, $response['code'] ?? 200);
+            } else {
+                Helpers::JsonResponse(
+                    false,
+                    "error when getting tenant with id: $id",
+                    null, 
+                    200);
+            }
 
-            Flight::jsonResponse($tenant, 200, JSON_PRETTY_PRINT);
+
+            
         });
 
         //TODO: tenant creation should be moved to register process
         Flight::route('POST /', function () {
-            $tenantId = Flight::TenantController()->create(Flight::request()->data->getData());
+            $response = Flight::TenantController()->create(Flight::request()->data->getData());
 
-            if (!$tenantId){
-                Flight::json(['error' => "Error while creating tenantId !!!"], 400);
+            if (!$response){
+                Helpers::jsonResponse(false, "Error while creating tenantId !!!", null, 400);
             }
 
-            Flight::jsonResponse(['success' => "Tenant created with id: $tenantId"], 200, JSON_PRETTY_PRINT);
+            Helpers::jsonResponseFromObject($response, $response['code'] ?? 200);
         })->addMiddleware(new IsOwnerMiddleware());
 
         Flight::route('PUT /@id', function ($id) {
             $data = Flight::request()->data;
             if ($data->id != $id)
-                throw new IllogicalValuesException("ID value missmatch");
+                throw new IllogicalValuesException("ID value mismatch");
 
-            Flight::jsonResponse(Flight::TenantController()->update($data->getData()), 200, JSON_PRETTY_PRINT);
+            $updatedTenant = Flight::TenantController()->update($data->getData());
+            Helpers::jsonResponse(true, "Tenant updated successfully", $updatedTenant, 200);
         })->addMiddleware(new IsOwnerMiddleware());
 
         Flight::route('DELETE /@id', function ($id) {
             $delete = Flight::TenantController()->delete($id);
-            Flight::jsonResponse($delete, 200, JSON_PRETTY_PRINT);
+            Helpers::jsonResponse(true, "Tenant deleted successfully", $delete, 200);
         })->addMiddleware(new IsAdminMiddleware());
 
     }, [new AuthMiddleware()]);

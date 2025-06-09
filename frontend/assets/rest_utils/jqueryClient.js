@@ -41,21 +41,27 @@ let RestClient = {
             });
     },
 
-    requestWprom: function (url, method, data) {
+    requestWpromise: function (url, method, data) {
         const ajaxOptions = {
             url: API_BASE_URL + url,
             type: method,
             beforeSend: function (xhr) {
                 const token = localStorage.getItem("user_token");
+                console.log("🚀 ~ token :::::::::::", token)
+                
                 if (token) {
                     xhr.setRequestHeader("Auth", token);
                 }
             }
         };
 
+
+
         // Handle data based on type
         if (data) {
             if (typeof data === 'object') {
+                console.log("🚀 ~ data:", data)
+
                 ajaxOptions.data = JSON.stringify(data);
                 ajaxOptions.contentType = "application/json";
             } else {

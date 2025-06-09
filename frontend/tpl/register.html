@@ -25,23 +25,24 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-1">Adventure starts here 🚀</h4>
+                    <h4 class="mb-1">Prijavite se 🚀</h4>
                     <p class="mb-6">Make your app management easy and fun!</p>
 
-                    <form id="formAuthentication" class="mb-6" action="#index" method="GET">
+                    <form id="formAuthentication" class="mb-6" action="#index" method="GET" onsubmit="registerUser(event)">
                         <div class="mb-6 form-control-validation">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label">Korisnicko ime</label>
                             <input
                                     type="text"
                                     class="form-control"
-                                    id="username"
+                                    id="name"
                                     name="username"
                                     placeholder="Enter your username"
+                                    value="user"
                                     autofocus />
                         </div>
                         <div class="mb-6 form-control-validation">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" />
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" value="user@test.com"/>
                         </div>
                         <div class="mb-6 form-password-toggle form-control-validation">
                             <label class="form-label" for="password">Password</label>
@@ -52,6 +53,7 @@
                                         class="form-control"
                                         name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        value="user123"
                                         aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
                             </div>
@@ -115,3 +117,24 @@
 
 <!-- Page JS -->
 <script src="assets/js/pages-auth.js"></script>
+
+<script>
+    registerUser = (event) => {
+        event.preventDefault();
+        const name = $('#name').val();
+        const email = $('#email').val();
+        const password = $('#password').val();
+
+        swal({
+            title: "Register",
+            text: `Email: ${email}\nPassword: ${password}, name: ${name}`,
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+        })
+        
+        UserService.register(email, password, name);
+
+    };
+  </script>
+
